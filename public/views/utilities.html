@@ -1,0 +1,720 @@
+<section class="tab-pane" id="tab-utilities">
+                    <div class="news-header-control">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="util-search-input" placeholder="ค้นหาเครื่องมือช่วยเหลือ...">
+                        </div>
+                        <div class="news-categories" id="util-categories">
+                            <button class="cat-btn active" data-util-cat="all">ทั้งหมด</button>
+                            <button class="cat-btn" data-util-cat="finance">การเงิน &amp; ลงทุน</button>
+                            <button class="cat-btn" data-util-cat="productivity">ผลิตภาพ &amp; งาน</button>
+                            <button class="cat-btn" data-util-cat="life">ชีวิตประจำวัน</button>
+                            <button class="cat-btn" data-util-cat="info">ข้อมูล &amp; ระบบ</button>
+                        </div>
+                    </div>
+
+                    <div id="utilities-grid"><div class="util-section" data-util-section="finance" style="display: block;">
+        <div class="util-section-header" style="margin: 0 0 1.25rem 0; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border-color); border-left: 4px solid #f59e0b; display: flex; flex-direction: column; gap: 0.15rem; font-family: var(--font-thai); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="card-glow" style="background: radial-gradient(circle at 0% 50%, rgba(245, 158, 11, 0.12), transparent 45%); opacity: 0.8; position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 1;">
+                <i data-lucide="coins" class="text-amber" style="width: 1.15rem; height: 1.15rem; filter: drop-shadow(0 0 6px #f59e0b);"></i>
+                <span style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); font-family: var(--font-thai);">การเงิน &amp; การลงทุน (Finance &amp; Investment)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; position: relative; z-index: 1; padding-left: 1.65rem; font-family: var(--font-thai);">ข้อมูลราคาทองคำ อัตราแลกเปลี่ยน การคำนวณภาษี ดอกเบี้ยเงินกู้ และการบันทึกรายรับรายจ่ายรายวัน</span>
+        </div>
+    <div class="utilities-section-grid"><div class="dashboard-card gold-tracker-card" data-util-category="finance">
+                            <div class="card-header">
+                                <h3><i data-lucide="coins" class="text-amber"></i> ราคาทองคำวันนี้ (สมาคมทองคำ)</h3>
+                                <span class="badge gold-badge-live">LIVE</span>
+                            </div>
+                            <div class="gold-prices-list">
+                                <div class="gold-item">
+                                    <div class="gold-label">ทองคำแท่ง 96.5% (รับซื้อ)</div>
+                                    <div class="gold-value font-kanit" id="gold-bar-buy">-- บาท</div>
+                                </div>
+                                <div class="gold-item">
+                                    <div class="gold-label">ทองคำแท่ง 96.5% (ขายออก)</div>
+                                    <div class="gold-value font-kanit text-amber" id="gold-bar-sell">-- บาท</div>
+                                </div>
+                                <hr class="card-divider">
+                                <div class="gold-item">
+                                    <div class="gold-label">ทองรูปพรรณ (รับซื้อคืน)</div>
+                                    <div class="gold-value font-kanit" id="gold-jewelry-buy">-- บาท</div>
+                                </div>
+                                <div class="gold-item">
+                                    <div class="gold-label">ทองรูปพรรณ (ขายออก)</div>
+                                    <div class="gold-value font-kanit text-amber" id="gold-jewelry-sell">-- บาท</div>
+                                </div>
+                            </div>
+                            <div class="gold-update-time" id="gold-update-time">
+                                อัปเดตล่าสุด: กำลังโหลด...
+                            </div>
+                        </div><div class="dashboard-card currency-card" data-util-category="finance">
+                            <div class="card-header">
+                                <h3><i data-lucide="refresh-cw" class="text-teal"></i> เครื่องแปลงอัตราแลกเปลี่ยน</h3>
+                            </div>
+                            <div class="currency-converter-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>ระบุจำนวนเงิน</label>
+                                    <input type="number" id="currency-input-amount" value="1000" class="form-control" style="font-family: var(--font-english); font-size: 1.1rem; font-weight: 600;">
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label style="font-size: 0.75rem; color: var(--text-muted);">จาก (From)</label>
+                                        <select id="currency-select-source" class="form-control" style="font-family: var(--font-thai); font-size: 0.8rem; height: 38px; padding: 0.2rem 0.5rem;">
+                                            <option value="THB" selected="">THB (บาทไทย)</option>
+                                            <option value="USD">USD (ดอลลาร์สหรัฐ)</option>
+                                            <option value="EUR">EUR (ยูโร)</option>
+                                            <option value="JPY">JPY (เยนญี่ปุ่น)</option>
+                                            <option value="CNY">CNY (หยวนจีน)</option>
+                                            <option value="SGD">SGD (ดอลลาร์สิงคโปร์)</option>
+                                            <option value="GBP">GBP (ปอนด์สเตอร์ลิง)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <button id="btn-currency-swap" class="btn-secondary" style="border-radius: 50%; width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; margin-top: 1.25rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); cursor: pointer; transition: transform 0.2s;">
+                                        <i data-lucide="arrow-left-right" style="width: 14px; height: 14px; color: var(--accent-teal);"></i>
+                                    </button>
+                                    
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label style="font-size: 0.75rem; color: var(--text-muted);">ไปเป็น (To)</label>
+                                        <select id="currency-select-target" class="form-control" style="font-family: var(--font-thai); font-size: 0.8rem; height: 38px; padding: 0.2rem 0.5rem;">
+                                            <option value="THB">THB (บาทไทย)</option>
+                                            <option value="USD" selected="">USD (ดอลลาร์สหรัฐ)</option>
+                                            <option value="EUR">EUR (ยูโร)</option>
+                                            <option value="JPY">JPY (เยนญี่ปุ่น)</option>
+                                            <option value="CNY">CNY (หยวนจีน)</option>
+                                            <option value="SGD">SGD (ดอลลาร์สิงคโปร์)</option>
+                                            <option value="GBP">GBP (ปอนด์สเตอร์ลิง)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="exchange-equals" style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+                                    ผลลัพธ์การแปลง
+                                </div>
+                                <div class="converted-result" style="text-align: center; margin-bottom: 0.25rem;">
+                                    <span id="currency-result-amount" style="font-size: 1.75rem; font-weight: 700; color: var(--accent-teal); font-family: var(--font-english);">0.00</span> 
+                                    <span class="unit" id="currency-result-unit" style="font-size: 1.1rem; font-weight: 600; color: var(--text-muted); margin-left: 0.25rem;">USD</span>
+                                </div>
+                                <div class="rate-details-text" id="currency-rate-info" style="text-align: center; font-size: 0.7rem; color: var(--text-muted);">
+                                    อัตราแลกเปลี่ยนปัจจุบัน: 1 THB = --.-- USD
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card crypto-prices-card" data-util-category="finance">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="trending-up" class="text-green"></i> ราคาเหรียญคริปโตวันนี้</h3>
+                                <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.25); padding: 0.15rem 0.4rem; border-radius: 6px; font-size: 0.7rem;">Binance Feed</span>
+                            </div>
+                            <div class="crypto-list" style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.75rem; font-family: var(--font-thai);">
+                                <div class="crypto-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.65rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="font-weight: 600; color: #f7931a;">BTC</span>
+                                        <span style="font-size: 0.7rem; color: var(--text-muted);">Bitcoin</span>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <strong id="crypto-price-btc" style="display: block; font-size: 0.95rem; font-family: var(--font-english);">--</strong>
+                                        <span id="crypto-thb-btc" style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-english);">-- THB</span>
+                                    </div>
+                                </div>
+                                <div class="crypto-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.65rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="font-weight: 600; color: #627eea;">ETH</span>
+                                        <span style="font-size: 0.7rem; color: var(--text-muted);">Ethereum</span>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <strong id="crypto-price-eth" style="display: block; font-size: 0.95rem; font-family: var(--font-english);">--</strong>
+                                        <span id="crypto-thb-eth" style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-english);">-- THB</span>
+                                    </div>
+                                </div>
+                                <div class="crypto-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.65rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="font-weight: 600; color: #f3ba2f;">BNB</span>
+                                        <span style="font-size: 0.7rem; color: var(--text-muted);">BNB</span>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <strong id="crypto-price-bnb" style="display: block; font-size: 0.95rem; font-family: var(--font-english);">--</strong>
+                                        <span id="crypto-thb-bnb" style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-english);">-- THB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card tax-calculator-card" data-util-category="finance">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="calculator" class="text-amber"></i> คำนวณภาษีเงินได้อย่างง่าย</h3>
+                            </div>
+                            <div class="tax-calculator-body" style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>เงินเดือน / รายได้ต่อเดือน (บาท)</label>
+                                    <input type="number" id="tax-monthly-salary" value="30000" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem; padding: 0.35rem 0.6rem;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>ลดหย่อนเพิ่มเติมต่อปี (LTF/RMF/ประกันฯ)</label>
+                                    <input type="number" id="tax-custom-deductions" value="0" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem; padding: 0.35rem 0.6rem;">
+                                </div>
+                                <button id="btn-calc-tax" class="btn-primary w-100" style="padding: 0.4rem 0; font-size: 0.85rem; margin-top: 0.25rem;"><i data-lucide="calculator" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> คำนวณภาษีสะสม</button>
+                                <div class="tax-result-box" style="margin-top: 0.4rem; padding: 0.5rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">ภาษีสะสมที่ต้องจ่ายปีนี้</div>
+                                    <strong id="tax-result-value" style="font-size: 1.15rem; color: var(--accent-amber); font-family: var(--font-english);">0.00 บาท</strong>
+                                    <div id="tax-bracket-info" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem;">ฐานภาษี: 0% (ยกเว้นภาษี)</div>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card commodities-card" data-util-category="finance">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="bar-chart-3" class="text-cyan"></i> ราคาสินค้าโภคภัณฑ์ &amp; เกษตร</h3>
+                            </div>
+                            <div class="commodities-body" style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.4rem; border-radius: 6px;">
+                                        <span style="font-size: 0.7rem; color: var(--text-muted); display: block;">น้ำมันดิบ Brent</span>
+                                        <strong id="commodity-brent" style="font-size: 0.95rem; font-family: var(--font-english);">-- USD</strong>
+                                    </div>
+                                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.4rem; border-radius: 6px;">
+                                        <span style="font-size: 0.7rem; color: var(--text-muted); display: block;">น้ำมันดิบ WTI</span>
+                                        <strong id="commodity-wti" style="font-size: 0.95rem; font-family: var(--font-english);">-- USD</strong>
+                                    </div>
+                                </div>
+                                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0.2rem 0;">
+                                <div class="agri-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.2rem 0;">
+                                    <span style="color: var(--text-muted);">ยางแผ่นดิบชั้น 3</span>
+                                    <strong id="commodity-rubber">-- บาท/กก.</strong>
+                                </div>
+                                <div class="agri-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.2rem 0;">
+                                    <span style="color: var(--text-muted);">ข้าวเปลือกหอมมะลิ</span>
+                                    <strong id="commodity-rice">-- บาท/ตัน</strong>
+                                </div>
+                                <div class="agri-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.2rem 0;">
+                                    <span style="color: var(--text-muted);">ผลปาล์มน้ำมันสด</span>
+                                    <strong id="commodity-palm">-- บาท/กก.</strong>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card loan-calc-card" data-util-category="finance">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="landmark" class="text-blue"></i> คำนวณสินเชื่อ / ผ่อนชำระ</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>ยอดเงินกู้ (บาท)</label>
+                                    <input type="number" id="loan-amount" value="2000000" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;">
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label>ดอกเบี้ย (%/ปี)</label>
+                                        <input type="number" id="loan-interest" value="6.5" step="0.1" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;">
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label>ระยะเวลา (ปี)</label>
+                                        <input type="number" id="loan-years" value="30" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                <button id="btn-calc-loan" class="btn-primary w-100" style="padding: 0.4rem 0; font-size: 0.85rem;">
+                                    <i data-lucide="calculator" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> คำนวณ
+                                </button>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.25rem;">
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.45rem; border-radius: 8px; text-align: center;">
+                                        <div style="font-size: 0.7rem; color: var(--text-muted);">ผ่อนเดือนละ</div>
+                                        <strong id="loan-monthly" style="font-size: 1rem; color: var(--accent-blue); font-family: var(--font-english);">0 บาท</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.45rem; border-radius: 8px; text-align: center;">
+                                        <div style="font-size: 0.7rem; color: var(--text-muted);">ดอกเบี้ยรวม</div>
+                                        <strong id="loan-total-interest" style="font-size: 1rem; color: var(--accent-red); font-family: var(--font-english);">0 บาท</strong>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-align: center;" id="loan-total-pay">ยอดชำระรวม: 0 บาท</div>
+                            </div>
+                        </div></div></div><div class="util-section" data-util-section="productivity" style="display: block;">
+        <div class="util-section-header" style="margin: 1.5rem 0 1.25rem 0; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border-color); border-left: 4px solid #06b6d4; display: flex; flex-direction: column; gap: 0.15rem; font-family: var(--font-thai); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="card-glow" style="background: radial-gradient(circle at 0% 50%, rgba(6, 182, 212, 0.12), transparent 45%); opacity: 0.8; position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 1;">
+                <i data-lucide="check-square" class="text-cyan" style="width: 1.15rem; height: 1.15rem; filter: drop-shadow(0 0 6px #06b6d4);"></i>
+                <span style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); font-family: var(--font-thai);">การทำงาน &amp; การเพิ่มประสิทธิภาพ (Productivity &amp; Work)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; position: relative; z-index: 1; padding-left: 1.65rem; font-family: var(--font-thai);">เครื่องมือจัดลำดับเวลา การจัดการเป้าหมาย และกล่องเครื่องมือนักพัฒนาซอฟต์แวร์</span>
+        </div>
+    <div class="utilities-section-grid"><div class="dashboard-card todo-widget" data-util-category="productivity">
+                            <div class="card-header">
+                                <h3><i data-lucide="check-square" class="text-blue"></i> เช็คลิสต์สิ่งที่ต้องทำวันนี้</h3>
+                            </div>
+                            <div class="todo-input-row">
+                                <input type="text" id="todo-input" placeholder="เพิ่มงานหรือสิ่งที่ต้องทำ..." class="form-control">
+                                <button id="btn-add-todo" class="btn-primary"><i data-lucide="plus"></i></button>
+                            </div>
+                            <ul class="todo-list" id="todo-list-container">
+                                <!-- Dynamic Todo Items -->
+                            </ul>
+                        </div><div class="dashboard-card worldclock-card" data-util-category="productivity">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="globe" class="text-cyan"></i> นาฬิกาโลก</h3>
+                            </div>
+                            <div id="worldclock-list" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <!-- Dynamically populated -->
+                            </div>
+                        </div><div class="dashboard-card json-epoch-card" data-util-category="productivity">
+                            <div class="card-header">
+                                <h3><i data-lucide="binary" class="text-amber"></i> เครื่องมือ JSON &amp; แปลงเวลา (Epoch)</h3>
+                            </div>
+                            <div class="json-epoch-body" style="display: flex; flex-direction: column; gap: 0.75rem; font-family: var(--font-thai);">
+                                <!-- Section 1: JSON Formatter -->
+                                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                                    <div style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem;">JSON Formatter &amp; Validator:</div>
+                                    <textarea id="json-input" class="form-control" style="font-size: 0.7rem; height: 70px; font-family: var(--font-english); resize: none;" placeholder="กรอกข้อความ JSON ตรงนี้ (เช่น {&quot;name&quot;: &quot;test&quot;})"></textarea>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.4rem;">
+                                        <button class="btn-secondary" id="btn-json-format" style="padding: 0.35rem 0; font-size: 0.7rem;">จัดระเบียบ JSON</button>
+                                        <button class="btn-secondary" id="btn-json-minify" style="padding: 0.35rem 0; font-size: 0.7rem;">บีบอัด JSON (Minify)</button>
+                                    </div>
+                                </div>
+                                <!-- Section 2: Epoch Converter -->
+                                <div>
+                                    <div style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem;">แปลงค่าเวลาคอมพิวเตอร์ (Epoch/Unix Time):</div>
+                                    <div style="display: flex; gap: 0.3rem;">
+                                        <input type="text" id="epoch-input" class="form-control" style="font-size: 0.75rem; padding: 0.35rem 0.5rem; font-family: var(--font-english);" placeholder="Timestamp เช่น 1781190000">
+                                        <button class="btn-primary" id="btn-epoch-convert" style="font-size: 0.7rem; padding: 0 0.60rem; white-space: nowrap;">แปลงค่า</button>
+                                    </div>
+                                    <div id="epoch-output" style="font-size: 0.7rem; margin-top: 0.40rem; color: var(--text-main); font-weight: 500; background: rgba(255,255,255,0.02); padding: 0.35rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); min-height: 25px; line-height: 1.3;">
+                                        ระบุค่าเวลาเพื่อทดสอบการแปลง...
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card dev-toolbox-card" data-util-category="productivity">
+                            <div class="card-header">
+                                <h3><i data-lucide="terminal" class="text-amber"></i> เครื่องมือจัดการข้อความ &amp; แปลงรหัส</h3>
+                            </div>
+                            <div class="dev-toolbox-body" style="display: flex; flex-direction: column; gap: 0.65rem; font-family: var(--font-thai);">
+                                <textarea id="dev-text-input" class="form-control" style="font-size: 0.75rem; height: 90px; resize: none;" placeholder="กรอกหรือวางข้อความตรงนี้เพื่อคำนวณหรือจัดการ..."></textarea>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: -0.25rem;">
+                                    <span>คำ: <strong id="dev-res-words" class="text-amber">0</strong> | ตัวอักษร: <strong id="dev-res-chars" class="text-amber">0</strong></span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem;">
+                                    <button class="btn-secondary dev-tool-btn" data-action="uppercase" style="padding: 0.35rem 0; font-size: 0.7rem;">ตัวพิมพ์ใหญ่</button>
+                                    <button class="btn-secondary dev-tool-btn" data-action="lowercase" style="padding: 0.35rem 0; font-size: 0.7rem;">ตัวพิมพ์เล็ก</button>
+                                    <button class="btn-secondary dev-tool-btn" data-action="urlencode" style="padding: 0.35rem 0; font-size: 0.7rem;">URL Encode</button>
+                                    <button class="btn-secondary dev-tool-btn" data-action="urldecode" style="padding: 0.35rem 0; font-size: 0.7rem;">URL Decode</button>
+                                    <button class="btn-secondary dev-tool-btn" data-action="base64encode" style="padding: 0.35rem 0; font-size: 0.7rem;">Base64 Encode</button>
+                                    <button class="btn-secondary dev-tool-btn" data-action="base64decode" style="padding: 0.35rem 0; font-size: 0.7rem;">Base64 Decode</button>
+                                </div>
+                            </div>
+                        </div></div></div><div class="util-section" data-util-section="life" style="display: block;">
+        <div class="util-section-header" style="margin: 1.5rem 0 1.25rem 0; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border-color); border-left: 4px solid #f43f5e; display: flex; flex-direction: column; gap: 0.15rem; font-family: var(--font-thai); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="card-glow" style="background: radial-gradient(circle at 0% 50%, rgba(244, 63, 94, 0.12), transparent 45%); opacity: 0.8; position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 1;">
+                <i data-lucide="heart" class="text-rose" style="width: 1.15rem; height: 1.15rem; filter: drop-shadow(0 0 6px #f43f5e);"></i>
+                <span style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); font-family: var(--font-thai);">วิถีชีวิต &amp; เครื่องมือทั่วไป (Lifestyle &amp; Daily Tools)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; position: relative; z-index: 1; padding-left: 1.65rem; font-family: var(--font-thai);">ตัวเลือกของกิน ระบบจัดการพื้นหลังสุขภาพ บันทึกการดื่มน้ำ และการจัดการรหัสผ่าน</span>
+        </div>
+    <div class="utilities-section-grid"><div class="dashboard-card wallpaper-engine-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="image" class="text-teal"></i> เปลี่ยนภาพพื้นหลัง (Wallpaper Engine)</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div style="color: var(--text-muted); font-size: 0.75rem;">
+                                    ปรับแต่งภาพพื้นหลังของหน้าจอให้สวยงาม หรูหรา มีชีวิตชีวา (แชร์ข้อมูลผ่านคลาวด์ได้)
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem;">
+                                    <button class="btn-secondary btn-wallpaper-preset active" data-wallpaper="default" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">ค่าเริ่มต้น</button>
+                                    <button class="btn-secondary btn-wallpaper-preset" data-wallpaper="mesh" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">Mesh Gradient</button>
+                                    <button class="btn-secondary btn-wallpaper-preset" data-wallpaper="forest" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">Minimal Forest</button>
+                                    <button class="btn-secondary btn-wallpaper-preset" data-wallpaper="cyber" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">Cyberpunk City</button>
+                                    <button class="btn-secondary btn-wallpaper-preset" data-wallpaper="space" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">Deep Space</button>
+                                    <button class="btn-secondary btn-wallpaper-preset" data-wallpaper="cozy" style="font-size: 0.75rem; padding: 0.4rem 0; font-family: var(--font-thai);">Cozy Cabin</button>
+                                </div>
+                                
+                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                    <label style="font-size: 0.7rem; color: var(--text-muted);">หรือระบุ URL รูปภาพที่ท่านต้องการ:</label>
+                                    <div style="display: flex; gap: 0.35rem;">
+                                        <input type="text" id="input-custom-wallpaper-url" placeholder="https://example.com/image.jpg" class="form-control" style="font-size: 0.75rem; padding: 0.35rem 0.5rem; flex-grow: 1; font-family: var(--font-english);">
+                                        <button id="btn-apply-custom-wallpaper" class="btn-primary" style="font-size: 0.75rem; padding: 0 0.6rem; border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-thai);">ใช้งาน</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card food-random-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="utensils" class="text-amber"></i> วันนี้กินอะไรดี?</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-thai);">
+                                <div id="food-display" style="width: 100%; text-align: center;">
+                                    <div id="food-emoji" style="font-size: 3rem; line-height: 1; margin-bottom: 0.25rem;">🍜</div>
+                                    <div id="food-name" style="font-size: 1.15rem; font-weight: 700;">กดปุ่มเพื่อสุ่มเมนู</div>
+                                    <div id="food-category" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem;">ประเภท: --</div>
+                                    <div id="food-price" style="font-size: 0.8rem; color: var(--accent-amber); margin-top: 0.1rem; font-family: var(--font-english);">ราคาประมาณ: -- บาท</div>
+                                </div>
+                                <button id="btn-random-food" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-amber); border-color: var(--accent-amber);">
+                                    <i data-lucide="shuffle" style="display:inline-block;width:14px;height:14px;vertical-align:middle;margin-right:4px"></i> สุ่มเมนูเลย!
+                                </button>
+                            </div>
+                        </div><div class="dashboard-card password-gen-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="key-round" class="text-green"></i> สร้างรหัสผ่านปลอดภัย</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div style="position: relative;">
+                                    <input type="text" id="password-output" readonly="" class="form-control" style="font-family: 'Courier New', monospace; font-size: 0.9rem; letter-spacing: 1px; padding-right: 2.5rem; text-align: center;">
+                                    <button id="btn-copy-password" style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 4px;" title="คัดลอก">
+                                        <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                                    </button>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>ความยาว: <span id="password-length-label" style="color: var(--accent-green); font-family: var(--font-english);">16</span> ตัวอักษร</label>
+                                    <input type="range" id="password-length" min="8" max="64" value="16" style="width: 100%; accent-color: var(--accent-green); cursor: pointer;">
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; font-size: 0.75rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer;">
+                                        <input type="checkbox" id="pw-uppercase" checked="" style="accent-color: var(--accent-green);"> A-Z ตัวพิมพ์ใหญ่
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer;">
+                                        <input type="checkbox" id="pw-lowercase" checked="" style="accent-color: var(--accent-green);"> a-z ตัวพิมพ์เล็ก
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer;">
+                                        <input type="checkbox" id="pw-numbers" checked="" style="accent-color: var(--accent-green);"> 0-9 ตัวเลข
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer;">
+                                        <input type="checkbox" id="pw-symbols" checked="" style="accent-color: var(--accent-green);"> !@#$ สัญลักษณ์
+                                    </label>
+                                </div>
+                                <button id="btn-gen-password" class="btn-primary w-100" style="padding: 0.4rem 0; font-size: 0.85rem; background: var(--accent-green); border-color: var(--accent-green);">
+                                    <i data-lucide="refresh-cw" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> สร้างรหัสผ่านใหม่
+                                </button>
+                                <div id="password-strength" style="font-size: 0.7rem; text-align: center; color: var(--text-muted);">ความปลอดภัย: --</div>
+                            </div>
+                        </div><div class="dashboard-card elec-bill-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="zap" class="text-amber"></i> ประมาณค่าไฟฟ้ารายเดือน</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>จำนวนหน่วยไฟที่ใช้ (kWh)</label>
+                                    <input type="number" id="elec-units" value="300" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;">
+                                </div>
+                                <button id="btn-calc-elec" class="btn-primary w-100" style="padding: 0.4rem 0; font-size: 0.85rem;">
+                                    <i data-lucide="zap" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> คำนวณค่าไฟ
+                                </button>
+                                <div style="padding: 0.5rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">ค่าไฟโดยประมาณ (รวม VAT + Ft)</div>
+                                    <strong id="elec-result" style="font-size: 1.25rem; color: var(--accent-amber); font-family: var(--font-english);">0.00 บาท</strong>
+                                    <div id="elec-breakdown" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.2rem;">--</div>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card unit-converter-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="ruler" class="text-purple"></i> แปลงหน่วยวัด</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>หมวดหมู่</label>
+                                    <select id="unit-category" class="form-control" style="font-size: 0.8rem;">
+                                        <option value="length">ระยะทาง</option>
+                                        <option value="weight">น้ำหนัก</option>
+                                        <option value="temperature">อุณหภูมิ</option>
+                                        <option value="area">พื้นที่ (ไร่/งาน/ตร.วา)</option>
+                                    </select>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 0.4rem;">
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label style="font-size: 0.7rem;">จาก</label>
+                                        <select id="unit-from" class="form-control" style="font-size: 0.75rem; height: 34px;"></select>
+                                    </div>
+                                    <button id="btn-unit-swap" style="background: none; border: 1px solid var(--border-color); border-radius: 50%; width: 28px; height: 28px; padding: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-bottom: 2px; transition: transform 0.2s;">
+                                        <i data-lucide="arrow-left-right" style="width: 12px; height: 12px; color: var(--accent-purple);"></i>
+                                    </button>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label style="font-size: 0.7rem;">ไปเป็น</label>
+                                        <select id="unit-to" class="form-control" style="font-size: 0.75rem; height: 34px;"></select>
+                                    </div>
+                                </div>
+                                <input type="number" id="unit-input" value="1" class="form-control" style="font-family: var(--font-english); font-size: 0.9rem; text-align: center;">
+                                <div style="text-align: center; padding: 0.4rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px;">
+                                    <span id="unit-result" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-purple); font-family: var(--font-english);">--</span>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card qrcode-card" data-util-category="life">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="qr-code" class="text-blue"></i> สร้าง QR Code</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>ประเภท</label>
+                                    <select id="qr-type" class="form-control" style="font-size: 0.8rem;">
+                                        <option value="text">ข้อความ / ลิงก์เว็บ</option>
+                                        <option value="promptpay">PromptPay พร้อมเพย์</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;" id="qr-text-group">
+                                    <label>ข้อความ / URL</label>
+                                    <input type="text" id="qr-text-input" value="https://example.com" class="form-control" style="font-size: 0.85rem;" placeholder="พิมพ์ข้อความหรือ URL...">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0; display: none;" id="qr-promptpay-group">
+                                    <label>เบอร์โทรหรือเลขบัตรประชาชน</label>
+                                    <input type="text" id="qr-promptpay-id" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;" placeholder="0812345678">
+                                    <div class="form-group" style="margin-bottom: 0; margin-top: 0.4rem;">
+                                        <label>จำนวนเงิน (บาท) - เว้นว่างได้</label>
+                                        <input type="number" id="qr-promptpay-amount" class="form-control" style="font-family: var(--font-english); font-size: 0.85rem;" placeholder="0.00">
+                                    </div>
+                                </div>
+                                <button id="btn-gen-qr" class="btn-primary w-100" style="padding: 0.4rem 0; font-size: 0.85rem;">
+                                    <i data-lucide="qr-code" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> สร้าง QR Code
+                                </button>
+                                <div id="qr-output" style="text-align: center; min-height: 40px;">
+                                    <canvas id="qr-canvas" style="max-width: 180px; border-radius: 8px; display: none;"></canvas>
+                                </div>
+                            </div>
+                        </div></div></div><div class="util-section" data-util-section="info" style="display: block;">
+        <div class="util-section-header" style="margin: 1.5rem 0 1.25rem 0; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border-color); border-left: 4px solid #10b981; display: flex; flex-direction: column; gap: 0.15rem; font-family: var(--font-thai); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="card-glow" style="background: radial-gradient(circle at 0% 50%, rgba(16, 185, 129, 0.12), transparent 45%); opacity: 0.8; position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 1;">
+                <i data-lucide="database" class="text-teal" style="width: 1.15rem; height: 1.15rem; filter: drop-shadow(0 0 6px #10b981);"></i>
+                <span style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); font-family: var(--font-thai);">ข้อมูล ระบบ &amp; ความบันเทิง (Info, Systems &amp; Media)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; position: relative; z-index: 1; padding-left: 1.65rem; font-family: var(--font-thai);">การตรวจสลากกินแบ่ง การสำรองข้อมูล ปฏิทิน คลื่นวิทยุช่วยผ่อนคลาย และเกมกระดานขนาดเล็ก</span>
+        </div>
+    <div class="utilities-section-grid"><div class="dashboard-card lotto-checker-card" data-util-category="info">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="award" class="text-purple"></i> ตรวจผลสลากกินแบ่งรัฐบาล</h3>
+                                <span class="badge" id="lotto-date-label" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.25); padding: 0.15rem 0.4rem; border-radius: 6px; font-size: 0.7rem;">กำลังโหลด...</span>
+                            </div>
+                            <div class="lotto-prizes-brief" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-thai);">
+                                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 8px; text-align: center;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">รางวัลที่ 1</span>
+                                    <strong id="lotto-prize-1" style="display: block; font-size: 1.25rem; color: var(--accent-amber); font-family: var(--font-english);">------</strong>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 8px; text-align: center;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">เลขท้าย 2 ตัว</span>
+                                    <strong id="lotto-suffix-2" style="display: block; font-size: 1.25rem; color: var(--accent-cyan); font-family: var(--font-english);">--</strong>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 8px; text-align: center;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">เลขหน้า 3 ตัว</span>
+                                    <strong id="lotto-prefix-3" style="display: block; font-size: 0.95rem; font-family: var(--font-english);">---, ---</strong>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 8px; text-align: center;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">เลขท้าย 3 ตัว</span>
+                                    <strong id="lotto-suffix-3" style="display: block; font-size: 0.95rem; font-family: var(--font-english);">---, ---</strong>
+                                </div>
+                            </div>
+                            <div class="lotto-checker-form" style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 0.75rem; font-family: var(--font-thai);">
+                                <div class="form-group" style="display: flex; gap: 0.5rem; margin-bottom: 0;">
+                                    <input type="text" id="lotto-check-number" placeholder="กรอกเลข 6 หลักเพื่อตรวจรางวัล" maxlength="6" class="form-control" style="font-family: var(--font-english); font-size: 0.9rem; text-align: center; letter-spacing: 2px;">
+                                    <button id="btn-check-lotto" class="btn-primary" style="padding: 0 1rem; font-size: 0.85rem; white-space: nowrap;"><i data-lucide="check" style="display:inline-block;width:14px;height:14px;vertical-align:middle;margin-right:2px"></i> ตรวจเลข</button>
+                                </div>
+                                <p id="lotto-check-result" style="font-size: 0.8rem; text-align: center; margin-top: 0.5rem; font-weight: 500; min-height: 1.2rem;"></p>
+                            </div>
+                        </div><div class="dashboard-card holiday-calendar-card" data-util-category="info">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="calendar-days" class="text-cyan"></i> ปฏิทินวันหยุด &amp; วันพระไทย</h3>
+                                <span class="badge" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.25); padding: 0.15rem 0.4rem; border-radius: 6px; font-size: 0.7rem;">ปี 2569</span>
+                            </div>
+                            <div class="holiday-list" id="holiday-list-container" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; max-height: 180px; overflow-y: auto; padding-right: 4px; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div style="text-align: center; color: var(--text-muted); padding: 1rem 0;">กำลังโหลดปฏิทินวันหยุด...</div>
+                            </div>
+                        </div><div class="dashboard-card data-backup-card" data-util-category="info">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="database" class="text-purple"></i> จัดการข้อมูลระบบ (Backup)</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-thai); font-size: 0.8rem;">
+                                <div style="color: var(--text-muted); font-size: 0.75rem;">
+                                    ส่งออกข้อมูลที่บันทึกไว้ในเบราว์เซอร์นี้ (โน้ต, รายรับ-รายจ่าย, เช็คลิสต์) เพื่อนำไปสำรองหรือย้ายไปใช้เครื่องอื่น
+                                </div>
+                                <button id="btn-backup-export" class="btn-primary w-100" style="padding: 0.5rem 0; font-size: 0.85rem; background: var(--accent-purple); border-color: var(--accent-purple);">
+                                    <i data-lucide="download" style="display:inline-block;width:14px;height:14px;vertical-align:middle;margin-right:4px"></i> ส่งออกข้อมูล (Export .json)
+                                </button>
+                                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+                                <div style="color: var(--text-muted); font-size: 0.75rem;">
+                                    นำเข้าข้อมูลจากการสำรองข้อมูล (การนำเข้าจะเขียนทับข้อมูลเดิมในเบราว์เซอร์นี้)
+                                </div>
+                                <input type="file" id="backup-file-input" accept=".json" style="display: none;">
+                                <button id="btn-backup-import" class="btn-secondary w-100" style="padding: 0.5rem 0; font-size: 0.85rem;">
+                                    <i data-lucide="upload" style="display:inline-block;width:14px;height:14px;vertical-align:middle;margin-right:4px"></i> นำเข้าข้อมูล (Import .json)
+                                </button>
+                            </div>
+                        </div><div class="dashboard-card settings-card" data-util-category="info">
+
+                            <div class="card-header">
+                                <h3><i data-lucide="sliders"></i> ตั้งค่าการเชื่อมโยงระบบ</h3>
+                            </div>
+                            <div class="settings-body">
+                                <p class="text-muted">ระบบนี้ดึงข้อมูลเรียลไทม์จากดาวเทียม Open-Meteo โดยไม่จำเป็นต้องใช้รหัสผ่าน (API Key)</p>
+                                <div class="form-group mt-3">
+                                    <label>พิกัดละติจูด (Latitude)</label>
+                                    <input type="text" id="setting-lat" value="13.7946" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>พิกัดลองจิจูด (Longitude)</label>
+                                    <input type="text" id="setting-lng" value="100.3242" class="form-control">
+                                </div>
+                                <div class="settings-actions">
+                                    <button class="btn-secondary" id="btn-reset-settings">ใช้พิกัด ม.มหิดล (ศาลายา)</button>
+                                    <button class="btn-primary" id="btn-save-settings">บันทึกตำแหน่งพิกัด</button>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card lucky-number-card" data-util-category="info">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="sparkles" class="text-purple"></i> เครื่องสุ่มเลขมงคลนำโชค</h3>
+                            </div>
+                            <div class="lucky-number-body" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; font-family: var(--font-thai);">
+                                <div style="display: flex; gap: 1rem; justify-content: center; width: 100%;">
+                                    <button class="btn-tab active w-50" id="btn-lucky-2" style="font-size: 0.8rem; padding: 0.35rem 0;">สุ่มเลข 2 ตัว</button>
+                                    <button class="btn-tab w-50" id="btn-lucky-3" style="font-size: 0.8rem; padding: 0.35rem 0;">สุ่มเลข 3 ตัว</button>
+                                </div>
+                                <div class="lucky-display-container" style="display: flex; gap: 0.75rem; justify-content: center; margin: 0.5rem 0;">
+                                    <div class="lucky-digit" id="lucky-digit-1" style="width: 48px; height: 56px; background: rgba(139, 92, 246, 0.1); border: 2px solid rgba(139, 92, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-english); font-size: 2rem; font-weight: 700; color: var(--accent-purple); transition: transform 0.2s;">?</div>
+                                    <div class="lucky-digit" id="lucky-digit-2" style="width: 48px; height: 56px; background: rgba(139, 92, 246, 0.1); border: 2px solid rgba(139, 92, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-english); font-size: 2rem; font-weight: 700; color: var(--accent-purple); transition: transform 0.2s;">?</div>
+                                    <div class="lucky-digit" id="lucky-digit-3" style="width: 48px; height: 56px; background: rgba(139, 92, 246, 0.1); border: 2px solid rgba(139, 92, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-english); font-size: 2rem; font-weight: 700; color: var(--accent-purple); transition: transform 0.2s; display: none;">?</div>
+                                </div>
+                                <button id="btn-gen-lucky" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-purple); border-color: var(--accent-purple);">
+                                    <i data-lucide="play" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> กดเพื่อสุ่มเลขมงคล
+                                </button>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">* เป็นเพียงตัวเลขสถิติเพื่อความบันเทิงเท่านั้น</span>
+                            </div>
+                        </div><div class="dashboard-card tarot-card-card" data-util-category="info">
+                            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.08), transparent 60%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="sparkles" class="text-pink"></i> เปิดไพ่ยิปซีทำนายดวงรายวัน</h3>
+                            </div>
+                            <div class="tarot-body" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; font-family: var(--font-thai);">
+                                <div class="tarot-card-container" id="tarot-card-container" style="perspective: 1000px; width: 110px; height: 176px; cursor: pointer;">
+                                    <div id="tarot-card-inner" style="position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                                        <!-- Card Front (Mystic Cover) -->
+                                        <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%); border: 2px solid #fbbf24; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fbbf24;">
+                                            <i data-lucide="moon-star" style="width: 36px; height: 36px;"></i>
+                                        </div>
+                                        <!-- Card Back (Actual Tarot Card) -->
+                                        <div id="tarot-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: var(--bg-card); border: 2px solid var(--accent-pink); border-radius: 12px; transform: rotateY(180deg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.5rem;">
+                                            <i id="tarot-icon" data-lucide="sun" class="text-pink" style="width: 28px; height: 28px; margin-bottom: 0.25rem;"></i>
+                                            <strong id="tarot-name" style="font-size: 0.75rem; color: var(--accent-pink); text-transform: uppercase;">THE SUN</strong>
+                                            <span style="font-size: 0.6rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.2;" id="tarot-mini-desc">ความสำเร็จและก้าวหน้า</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="width: 100%; display: flex; flex-direction: column; gap: 0.4rem;">
+                                    <button id="btn-draw-tarot" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-pink); border-color: var(--accent-pink);">กดเพื่อสุ่มไพ่ประจำวัน</button>
+                                    <p id="tarot-full-prediction" style="font-size: 0.75rem; color: var(--text-muted); min-height: 2.5rem; margin-top: 0.25rem; line-height: 1.4;">ตั้งจิตอธิษฐานแล้วกดสุ่มเพื่อดูดวงชะตาประคองความคิดวันนี้กันค่ะ</p>
+                                </div>
+                            </div>
+                        </div><div class="dashboard-card network-tools-card" data-util-category="info">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                                <h3 style="margin: 0; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-thai);"><i data-lucide="globe" class="text-teal" style="width: 16px; height: 16px;"></i> ระบบเครือข่าย &amp; ความเร็ว</h3>
+                                <div class="game-select-controls" style="display: flex; gap: 0.25rem;" id="net-card-tabs">
+                                    <button class="btn-tab-small active" data-net-tab="status" style="font-size: 0.65rem; padding: 0.25rem 0.4rem; border: none; border-radius: 4px; cursor: pointer; font-family: var(--font-thai);">สถานะ</button>
+                                    <button class="btn-tab-small" data-net-tab="speed" style="font-size: 0.65rem; padding: 0.25rem 0.4rem; border: none; border-radius: 4px; cursor: pointer; font-family: var(--font-thai);">ความเร็ว</button>
+                                    <button class="btn-tab-small" data-net-tab="diag" style="font-size: 0.65rem; padding: 0.25rem 0.4rem; border: none; border-radius: 4px; cursor: pointer; font-family: var(--font-thai);">วินิจฉัย</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab 1: Status -->
+                            <div class="net-tab-content" id="net-tab-status" style="display: flex; flex-direction: column; gap: 0.6rem; font-family: var(--font-thai); font-size: 0.8rem; line-height: 1.4;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>IP สาธารณะ:</span>
+                                    <strong id="net-ip" style="font-family: var(--font-english); color: var(--accent-teal);">กำลังตรวจ...</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>ผู้ให้บริการ (ISP):</span>
+                                    <strong id="net-isp" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 150px; text-align: right;">กำลังตรวจ...</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>พื้นที่พิกัด:</span>
+                                    <strong id="net-location">กำลังตรวจ...</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>ความหน่วง (Browser Ping):</span>
+                                    <strong id="net-ping" style="font-family: var(--font-english);">-- ms</strong>
+                                </div>
+                                <button id="btn-ping-test" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.8rem; margin-top: 0.25rem; border-radius: 8px; border: none; cursor: pointer; color: white; font-family: var(--font-thai);">
+                                    <i data-lucide="refresh-cw" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> รีเฟรชข้อมูล
+                                </button>
+                            </div>
+
+                            <!-- Tab 2: Speedtest -->
+                            <div class="net-tab-content" id="net-tab-speed" style="display: none; flex-direction: column; gap: 0.75rem; font-family: var(--font-thai);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                    <button id="btn-run-client-speed" class="btn-secondary" style="font-size: 0.7rem; padding: 0.45rem 0; font-family: var(--font-thai); border-radius: 6px; cursor: pointer;">วัดความเร็วเน็ตคุณ</button>
+                                    <button id="btn-run-server-speed" class="btn-primary" style="font-size: 0.7rem; padding: 0.45rem 0; font-family: var(--font-thai); color: white; border: none; border-radius: 6px; cursor: pointer;">วัดความเร็วเน็ต VPS</button>
+                                </div>
+                                
+                                <div id="speedtest-status-area" style="text-align: center; font-size: 0.7rem; color: var(--text-muted); margin: 0.15rem 0;">
+                                    เลือกการทดสอบเพื่อเริ่มวัดผลความเร็วสัญญาณ
+                                </div>
+
+                                <!-- Gauge / Indicator -->
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.15); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <div style="font-size: 1.6rem; font-weight: 700; color: var(--accent-teal); font-family: var(--font-english); display: flex; align-items: baseline; gap: 0.2rem;">
+                                        <span id="speedtest-value">--.-</span>
+                                        <span id="speedtest-unit" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Mbps</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-top: 0.5rem; overflow: hidden; border: 1px solid var(--border-color);">
+                                        <div id="speedtest-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-teal), var(--accent-cyan)); transition: width 0.3s ease-out;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 3: Diagnostics -->
+                            <div class="net-tab-content" id="net-tab-diag" style="display: none; flex-direction: column; gap: 0.6rem; font-family: var(--font-thai);">
+                                <div style="display: flex; gap: 0.4rem;">
+                                    <input type="text" id="diag-host-input" class="form-control" placeholder="โฮสต์ เช่น google.com หรือ 1.1.1.1" value="google.com" style="font-size: 0.75rem; padding: 0.4rem 0.5rem; flex-grow: 1; font-family: var(--font-english); background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 6px; outline: none;">
+                                    <input type="number" id="diag-port-input" class="form-control" placeholder="พอร์ต" value="80" style="font-size: 0.75rem; padding: 0.4rem 0.5rem; width: 60px; font-family: var(--font-english); background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 6px; outline: none;">
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 0.3rem;">
+                                    <button class="btn-secondary diag-action-btn" data-diag-action="ping" style="font-size: 0.7rem; padding: 0.40rem 0; cursor: pointer; border-radius: 6px; font-family: var(--font-thai);">Ping Test</button>
+                                    <button class="btn-secondary diag-action-btn" data-diag-action="dns" style="font-size: 0.7rem; padding: 0.40rem 0; cursor: pointer; border-radius: 6px; font-family: var(--font-thai);">DNS Lookup</button>
+                                    <button class="btn-secondary diag-action-btn" data-diag-action="port" style="font-size: 0.7rem; padding: 0.40rem 0; cursor: pointer; border-radius: 6px; font-family: var(--font-thai);">Port Check</button>
+                                </div>
+                                
+                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                    <span style="font-size: 0.7rem; color: var(--text-muted);">ผลการตรวจสอบ (Terminal Output):</span>
+                                    <pre id="diag-terminal" style="margin: 0; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.6rem; font-family: monospace; font-size: 0.65rem; color: #10b981; height: 95px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.3; font-weight: 500;">พิมพ์โฮสต์ปลายทางและเลือกปุ่มทดสอบด้านบน...</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card mini-games-card" data-util-category="info">
+                            <div class="card-header">
+                                <h3><i data-lucide="gamepad-2" class="text-amber"></i> เกมเล่นแก้เซ็ง (Snake &amp; Puzzle)</h3>
+                                <div class="game-select-controls" style="display: flex; gap: 0.35rem;">
+                                    <button id="btn-game-snake" class="btn-tab-small active" style="font-size: 0.7rem; padding: 0.2rem 0.4rem; border: none; border-radius: 4px; cursor: pointer;">เกมงู</button>
+                                    <button id="btn-game-puzzle" class="btn-tab-small" style="font-size: 0.7rem; padding: 0.2rem 0.4rem; border: none; border-radius: 4px; cursor: pointer;">15-Puzzle</button>
+                                </div>
+                            </div>
+                            <div class="mini-games-body" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: var(--font-thai);">
+                                <!-- Snake Game Area -->
+                                <div id="game-snake-area" style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                                    <canvas id="snake-canvas" width="250" height="170" style="background: #111827; border: 2px solid var(--border-color); border-radius: 8px; display: block;"></canvas>
+                                    <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.75rem; margin-top: 0.25rem; padding: 0 0.5rem;">
+                                        <span>คะแนน: <strong id="snake-score" class="text-amber">0</strong></span>
+                                        <span style="font-size: 0.65rem; color: var(--text-muted);">ปุ่มควบคุม: ลูกศรคีย์บอร์ด</span>
+                                    </div>
+                                    <button id="btn-start-snake" class="btn-primary" style="padding: 0.3rem 0.8rem; font-size: 0.75rem; margin-top: 0.35rem;">เริ่มเกม</button>
+                                </div>
+                                
+                                <!-- 15-Puzzle Area -->
+                                <div id="game-puzzle-area" style="width: 100%; display: none; flex-direction: column; align-items: center;">
+                                    <div id="puzzle-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; width: 250px; height: 170px; background: rgba(255,255,255,0.02); border: 2px solid var(--border-color); border-radius: 8px; padding: 4px;">
+                                        <!-- Tiles generated by JS -->
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.75rem; margin-top: 0.25rem; padding: 0 0.5rem;">
+                                        <span>จำนวนก้าว: <strong id="puzzle-moves" class="text-amber">0</strong></span>
+                                        <button id="btn-reset-puzzle" style="background:none; border:none; color:var(--accent-amber); cursor:pointer; font-weight:600;">เริ่มใหม่</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div></div></div>
+                
+    
+
+    <div id="util-no-results" style="display: none; text-align: center; padding: 3rem 0; color: var(--text-muted); font-family: var(--font-thai); width: 100%;">
+        <i data-lucide="help-circle" style="width: 36px; height: 36px; margin: 0 auto 0.5rem; display: block; opacity: 0.5;"></i>
+        <span>ไม่พบเครื่องมือช่วยเหลือที่คุณต้องการ ลองค้นหาด้วยคำอื่นดูนะ</span>
+    </div>
+</section>

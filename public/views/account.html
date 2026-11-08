@@ -1,0 +1,146 @@
+<!-- Account, Sync & Data Backup View -->
+<div class="account-backup-container" style="font-family: var(--font-thai); display: flex; flex-direction: column; gap: 1.5rem; animation: fadeIn 0.4s ease;">
+    <div>
+        <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="user-cog" style="color: var(--accent-indigo);"></i> บัญชี & สำรองข้อมูล (Account & Backup)</h3>
+        <p style="margin: 3px 0 0; font-size: 0.8rem; color: var(--text-muted);">จัดการข้อมูลบัญชีผู้ใช้งาน ซิงก์ระบบคลาวด์ และนำเข้า/ส่งออกข้อมูลสำรอง</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+        <!-- Cloud Sync & Account Status Card -->
+        <div class="dashboard-card" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="cloud" style="width: 16px; height: 16px; color: var(--accent-indigo);"></i> บริการซิงก์ข้อมูลคลาวด์ (Cloud Sync)</h4>
+            
+            <div id="account-status-panel" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: var(--text-muted);">สถานะบัญชี:</span>
+                    <strong id="acc-status-value" style="color: var(--text-muted);">ออฟไลน์ (Offline)</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: var(--text-muted);">ผู้ใช้งานปัจจุบัน:</span>
+                    <strong id="acc-username-value" style="font-family: var(--font-english);">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: var(--text-muted);">ซิงก์ข้อมูลล่าสุด:</span>
+                    <strong id="acc-last-sync" style="font-family: var(--font-english);">-</strong>
+                </div>
+            </div>
+
+            <!-- Login / Logout Trigger Button -->
+            <div id="account-actions-wrapper" style="display: flex; gap: 0.75rem; margin-top: auto;">
+                <button id="btn-account-login" class="btn-primary" style="flex: 1; padding: 0.55rem; font-size: 0.82rem; font-weight: 600;">เข้าสู่ระบบ / สมัครสมาชิก</button>
+                <button id="btn-account-logout" class="btn-secondary" style="flex: 1; padding: 0.55rem; font-size: 0.82rem; font-weight: 600; display: none; color: var(--accent-red); border-color: rgba(239,68,68,0.2);">ออกจากระบบ</button>
+            </div>
+        </div>
+
+        <!-- Personal Profile Card -->
+        <div class="dashboard-card" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="user" style="width: 16px; height: 16px; color: var(--accent-pink);"></i> ข้อมูลโปรไฟล์ส่วนตัว (Personal Profile)</h4>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div id="acc-avatar-preview" style="width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ef4444); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); flex-shrink: 0; transition: all 0.3s ease;">
+                    <i data-lucide="user" style="width: 26px; height: 26px; color: white;"></i>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.2rem; flex-grow: 1;">
+                    <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">ชื่อแสดงในระบบ (Display Name)</label>
+                    <input type="text" id="acc-display-name-input" class="form-control" style="font-size: 0.8rem; padding: 0.4rem 0.6rem;" placeholder="ระบุชื่อเล่นของคุณ...">
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">เลือกสีอวาตาร์ (Avatar Color)</span>
+                <div id="avatar-color-picker" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <div class="avatar-option" data-avatar="sunset" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ef4444); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                    <div class="avatar-option" data-avatar="ocean" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #06b6d4, #3b82f6); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                    <div class="avatar-option" data-avatar="forest" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #047857); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                    <div class="avatar-option" data-avatar="neon" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #ec4899); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                    <div class="avatar-option" data-avatar="midnight" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #475569, #1e293b); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                    <div class="avatar-option" data-avatar="candy" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #fbbf24, #f43f5e); cursor: pointer; border: 2px solid transparent; transition: transform 0.2s;"></div>
+                </div>
+            </div>
+            <button id="btn-save-profile" class="btn-primary" style="padding: 0.5rem; font-size: 0.8rem; background: var(--accent-pink); border-color: var(--accent-pink); margin-top: auto;">บันทึกข้อมูลส่วนตัว</button>
+        </div>
+
+        <!-- Data Backup & Restore Card -->
+        <div class="dashboard-card" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="hard-drive" style="width: 16px; height: 16px; color: var(--accent-cyan);"></i> สำรองข้อมูลแบบไฟล์ (Local Backup)</h4>
+            
+            <p style="margin: 0; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">คุณสามารถดาวน์โหลดข้อมูลวิดเจ็ต, บันทึกด่วน, การจัดเลย์เอาต์ และข้อมูลการตั้งค่าทั้งหมด เก็บเป็นไฟล์ .json เพื่อย้ายเครื่องหรือแชร์อุปกรณ์ได้</p>
+            
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.8rem;">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted);">ข้อมูลบันทึกย่อ:</span>
+                    <span id="stat-sticky-notes" style="font-family: var(--font-english); font-weight: 600;">0 รายการ</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted);">ข้อมูลรายจ่าย:</span>
+                    <span id="stat-budget-logs" style="font-family: var(--font-english); font-weight: 600;">0 รายการ</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-top: auto;">
+                <button id="btn-export-backup" class="btn-secondary" style="flex: 1; padding: 0.55rem; font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.35rem; cursor: pointer;">
+                    <i data-lucide="download" style="width: 14px; height: 14px;"></i> ส่งออกข้อมูล (Export)
+                </button>
+                <button id="btn-import-backup-trigger" class="btn-primary" style="flex: 1; padding: 0.55rem; font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.35rem; cursor: pointer;">
+                    <i data-lucide="upload" style="width: 14px; height: 14px;"></i> นำเข้าข้อมูล (Import)
+                </button>
+                <input type="file" id="input-import-backup" style="display: none;" accept=".json">
+            </div>
+        </div>
+
+        <!-- Storage Inspector Card -->
+        <div class="dashboard-card" style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="database" style="width: 16px; height: 16px; color: var(--accent-purple);"></i> ความจุข้อมูลที่ใช้บนบอร์ด (Storage Inspector)</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.78rem; flex-grow: 1;">
+                <div style="display: flex; justify-content: space-between; font-weight: 600; color: var(--text-muted); border-bottom: 1px dashed var(--border-color); padding-bottom: 0.25rem;">
+                    <span>ประเภทข้อมูล</span>
+                    <span>ขนาด (Bytes)</span>
+                </div>
+                <div id="storage-keys-list" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 120px; overflow-y: auto; padding-right: 0.25rem; font-family: var(--font-english);">
+                    <!-- Dynamic items -->
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid var(--border-color); padding-top: 0.4rem; margin-top: auto;">
+                    <span>รวมเนื้อที่ที่ใช้:</span>
+                    <span id="storage-total-size" style="font-family: var(--font-english); color: var(--accent-purple);">0 Bytes</span>
+                </div>
+            </div>
+            
+            <button id="btn-clear-all-storage" class="btn-secondary" style="padding: 0.5rem; font-size: 0.8rem; color: var(--accent-red); border-color: rgba(239, 68, 68, 0.2); margin-top: auto;">🧹 ล้างข้อมูลแคชทั้งหมด</button>
+        </div>
+
+        <!-- Change Password Card -->
+        <div id="acc-change-password-card" class="dashboard-card" style="padding: 1.25rem; display: none; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="key-round" style="width: 16px; height: 16px; color: var(--accent-amber);"></i> เปลี่ยนรหัสผ่าน (Change Password)</h4>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">รหัสผ่านปัจจุบัน (Current Password)</label>
+                    <input type="password" id="acc-pwd-current" class="form-control" style="font-size: 0.8rem; padding: 0.45rem 0.6rem;" placeholder="กรอกรหัสผ่านเดิมของคุณ...">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">รหัสผ่านใหม่ (New Password)</label>
+                    <input type="password" id="acc-pwd-new" class="form-control" style="font-size: 0.8rem; padding: 0.45rem 0.6rem;" placeholder="อย่างน้อย 6 ตัวอักษร...">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">ยืนยันรหัสผ่านใหม่ (Confirm New Password)</label>
+                    <input type="password" id="acc-pwd-new-confirm" class="form-control" style="font-size: 0.8rem; padding: 0.45rem 0.6rem;" placeholder="กรอกรหัสผ่านใหม่อีกครั้ง...">
+                </div>
+            </div>
+            <button id="btn-change-password" class="btn-primary" style="padding: 0.5rem; font-size: 0.8rem; background: var(--accent-amber); border-color: var(--accent-amber); margin-top: auto;">อัปเดตรหัสผ่านใหม่</button>
+        </div>
+
+        <!-- Active Sessions Card -->
+        <div id="acc-sessions-card" class="dashboard-card" style="padding: 1.25rem; display: none; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="smartphone" style="width: 16px; height: 16px; color: var(--accent-green);"></i> เซสชันที่ล็อกอินค้างไว้ (Active Sessions)</h4>
+            <div id="acc-sessions-list" style="display: flex; flex-direction: column; gap: 0.65rem; max-height: 250px; overflow-y: auto; padding-right: 4px;">
+                <!-- Sessions list will load dynamically -->
+            </div>
+        </div>
+
+        <!-- App Login History Card -->
+        <div id="acc-login-history-card" class="dashboard-card" style="padding: 1.25rem; display: none; flex-direction: column; gap: 1rem;">
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="history" style="width: 16px; height: 16px; color: var(--accent-indigo);"></i> ประวัติเข้าสู่ระบบแอป (Login History)</h4>
+            <div id="acc-login-history-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 250px; overflow-y: auto; padding-right: 4px; font-size: 0.8rem;">
+                <!-- Login history will load dynamically -->
+            </div>
+        </div>
+    </div>
+</div>

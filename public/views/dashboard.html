@@ -1,0 +1,493 @@
+                <section class="tab-pane active" id="tab-dashboard">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                        <h2 style="margin:0; font-family:var(--font-thai); font-weight:600; font-size: 1.25rem;">ภาพรวมประจำวัน</h2>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button id="btn-manage-widgets" class="btn-secondary" style="font-family: var(--font-thai); font-size: 0.75rem; padding: 0.25rem 0.6rem; display: flex; align-items: center; gap: 0.35rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;">
+                                <i data-lucide="layout" style="width: 12px; height: 12px;"></i> จัดการวิดเจ็ต
+                            </button>
+                            <button id="btn-reset-dashboard" class="btn-secondary" style="font-family: var(--font-thai); font-size: 0.75rem; padding: 0.25rem 0.6rem; display: flex; align-items: center; gap: 0.35rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;">
+                                <i data-lucide="rotate-ccw" style="width: 12px; height: 12px;"></i> รีเซ็ตการจัดวาง
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Breaking News Ticker -->
+                    <div id="dashboard-news-ticker-container" style="background: rgba(22, 28, 54, 0.35); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.45rem 1rem; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: var(--font-thai);">
+                        <span style="font-size: 0.7rem; font-weight: bold; background: linear-gradient(135deg, var(--accent-red), #f59e0b); color: white; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; white-space: nowrap; box-shadow: 0 0 8px rgba(239,68,68,0.3); display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0;">
+                            <i data-lucide="megaphone" style="width: 12px; height: 12px;"></i> ด่วน
+                        </span>
+                        <div style="overflow: hidden; white-space: nowrap; flex-grow: 1; position: relative; display: flex; align-items: center; height: 20px;">
+                            <div id="news-ticker-text" class="ticker-animate" style="display: inline-block; padding-left: 100%; color: var(--text-main); font-size: 0.75rem; font-weight: 500; cursor: pointer; white-space: nowrap;">
+                                กำลังดึงข้อมูลข่าวสารด่วนล่าสุด...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Weather & PM2.5 Alert Banner -->
+                    <div id="dashboard-weather-alert-container" style="display: none; background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 10px; padding: 0.6rem 1rem; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.75rem; box-shadow: 0 4px 15px rgba(239,68,68,0.1); font-family: var(--font-thai); transition: all 0.3s ease;">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; color: #fff; font-size: 0.78rem; font-weight: 500; flex-grow: 1; min-width: 0;">
+                            <div style="background: rgba(239, 68, 68, 0.2); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; animation: pulseGlow 2s infinite;">
+                                <i data-lucide="alert-triangle" style="width: 14px; height: 14px; color: var(--accent-red);"></i>
+                            </div>
+                            <span id="dashboard-weather-alert-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                กำลังวิเคราะห์สภาพอากาศเพื่อประเมินความปลอดภัย...
+                            </span>
+                        </div>
+                        <button id="btn-close-weather-alert" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0 0.25rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-muted)';" aria-label="Close Alert">&times;</button>
+                    </div>
+
+                    <div class="dashboard-draggable-container" id="dashboard-draggable-grid">
+                        <!-- 1. Greeting & Clock -->
+                        <div class="dashboard-card greeting-widget draggable-card" id="widget-greeting" draggable="true">
+                            <div class="card-glow"></div>
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                                <div>
+                                    <h3 id="dash-greeting-text" style="margin: 0; font-family: var(--font-thai); font-weight: 500; color: var(--text-muted); font-size: 1rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i>สวัสดี</h3>
+                                    <div id="dash-clock-time" style="font-size: 2.5rem; font-family: var(--font-english); font-weight: 700; color: var(--text-main); margin-top: 0.5rem; letter-spacing: -1px;">--:--</div>
+                                    <div id="dash-clock-date" style="font-size: 0.9rem; font-family: var(--font-thai); color: var(--primary-color); margin-top: 0.2rem;">กำลังโหลดวันที่...</div>
+                                </div>
+                                <div id="dash-greeting-icon-bg" style="background: rgba(99,102,241,0.1); padding: 1rem; border-radius: 50%;">
+                                    <i id="dash-greeting-icon" data-lucide="sun" style="width: 32px; height: 32px; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Weather Brief Card -->
+                        <div class="dashboard-card weather-brief draggable-card" id="widget-weather" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="brief-header">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab;"></i> สภาพอากาศขณะนี้</span>
+                                <button class="btn-detail-link" onclick="switchTab('weather')">
+                                    <span>ดูรายละเอียด</span> <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                                </button>
+                            </div>
+                            <div class="brief-body">
+                                <div class="temp-display">
+                                    <span id="dash-temp">--</span>°C
+                                </div>
+                                <div class="weather-desc" id="dash-weather-desc">กำลังโหลดข้อมูล...</div>
+                            </div>
+                            <div class="brief-footer">
+                                <span id="dash-rain-chance"><i data-lucide="droplet"></i> โอกาสฝน: --%</span>
+                            </div>
+                        </div>
+
+                        <!-- 3. PM2.5 Brief Card -->
+                        <div class="dashboard-card pm25-brief draggable-card" id="widget-pm25" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="brief-header">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab;"></i> ฝุ่น PM 2.5 วันนี้</span>
+                                <button class="btn-detail-link" onclick="switchTab('weather')">
+                                    <span>ดูรายละเอียด</span> <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                                </button>
+                            </div>
+                            <div class="brief-body">
+                                <div class="aqi-display">
+                                    <span id="dash-pm25">--</span> <span class="unit">µg/m³</span>
+                                </div>
+                                <div class="aqi-badge status-good" id="dash-pm25-status">กำลังโหลด...</div>
+                            </div>
+                            <div class="brief-footer">
+                                <span id="dash-pm25-advice">อากาศดี เหมาะแก่การทำกิจกรรมกลางแจ้ง</span>
+                            </div>
+                        </div>
+
+                        <!-- 4. VPS Server Status Card -->
+                        <div class="dashboard-card vps-status-card draggable-card" id="widget-vps" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="brief-header">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab;"></i> สถานะเซิร์ฟเวอร์ VPS</span>
+                                <span class="badge-online" id="vps-online-status"><span class="dot"></span> Online</span>
+                            </div>
+                            <div class="vps-stats-body">
+                                <!-- Radial SVG Indicators -->
+                                <div style="display: flex; justify-content: space-around; align-items: center; padding: 0.35rem 0 0.5rem 0; gap: 0.35rem;">
+                                    <!-- CPU Circle -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+                                        <div style="position: relative; width: 60px; height: 60px;">
+                                            <svg width="60" height="60" viewBox="0 0 60 60" style="transform: rotate(-90deg);">
+                                                <circle cx="30" cy="30" r="25" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent"/>
+                                                <circle id="vps-cpu-circle" cx="30" cy="30" r="25" stroke="var(--accent-purple)" stroke-width="4" fill="transparent" stroke-dasharray="157.08" stroke-dashoffset="157.08" stroke-linecap="round" style="transition: stroke-dashoffset 0.4s ease; filter: drop-shadow(0 0 4px var(--accent-purple));"/>
+                                            </svg>
+                                            <div id="vps-cpu-pct" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: 700; color: white; font-family: var(--font-english);">0%</div>
+                                        </div>
+                                        <span style="font-size: 0.62rem; color: var(--text-muted); font-weight: 500; display:flex; align-items:center; gap:0.2rem;"><i data-lucide="cpu" style="width:9px; height:9px; color: var(--accent-purple);"></i> CPU</span>
+                                    </div>
+
+                                    <!-- RAM Circle -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+                                        <div style="position: relative; width: 60px; height: 60px;">
+                                            <svg width="60" height="60" viewBox="0 0 60 60" style="transform: rotate(-90deg);">
+                                                <circle cx="30" cy="30" r="25" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent"/>
+                                                <circle id="vps-ram-circle" cx="30" cy="30" r="25" stroke="var(--accent-cyan)" stroke-width="4" fill="transparent" stroke-dasharray="157.08" stroke-dashoffset="157.08" stroke-linecap="round" style="transition: stroke-dashoffset 0.4s ease; filter: drop-shadow(0 0 4px var(--accent-cyan));"/>
+                                            </svg>
+                                            <div id="vps-ram-pct" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: 700; color: white; font-family: var(--font-english);">0%</div>
+                                        </div>
+                                        <span style="font-size: 0.62rem; color: var(--text-muted); font-weight: 500; display:flex; align-items:center; gap:0.2rem;"><i data-lucide="hard-drive" style="width:9px; height:9px; color: var(--accent-cyan);"></i> RAM</span>
+                                    </div>
+
+                                    <!-- Disk Circle -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+                                        <div style="position: relative; width: 60px; height: 60px;">
+                                            <svg width="60" height="60" viewBox="0 0 60 60" style="transform: rotate(-90deg);">
+                                                <circle cx="30" cy="30" r="25" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent"/>
+                                                <circle id="vps-disk-circle" cx="30" cy="30" r="25" stroke="var(--accent-amber)" stroke-width="4" fill="transparent" stroke-dasharray="157.08" stroke-dashoffset="157.08" stroke-linecap="round" style="transition: stroke-dashoffset 0.4s ease; filter: drop-shadow(0 0 4px var(--accent-amber));"/>
+                                            </svg>
+                                            <div id="vps-disk-pct" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: 700; color: white; font-family: var(--font-english);">0%</div>
+                                        </div>
+                                        <span style="font-size: 0.62rem; color: var(--text-muted); font-weight: 500; display:flex; align-items:center; gap:0.2rem;"><i data-lucide="database" style="width:9px; height:9px; color: var(--accent-amber);"></i> DISK</span>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.72rem; padding: 0.45rem 0.2rem 0.2rem 0.2rem; border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-thai);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="color: var(--text-muted);">ภาระโหลด CPU:</span>
+                                        <strong id="vps-cpu-load" style="color: white; font-family: var(--font-english);">--</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="color: var(--text-muted);">หน่วยความจำ RAM:</span>
+                                        <strong id="vps-ram-used" style="color: white; font-family: var(--font-english);">--</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="color: var(--text-muted);">พื้นที่จัดเก็บ Disk:</span>
+                                        <strong id="vps-disk-used" style="color: white; font-family: var(--font-english);">--</strong>
+                                    </div>
+                                </div>
+
+                                <div class="vps-docker-section" style="margin-top: 0.5rem; border-top: 1px solid var(--border-color); padding-top: 0.5rem; font-family: var(--font-thai);">
+                                    <div style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="display:flex;align-items:center;gap:0.3rem;"><i data-lucide="container" style="width: 12px; height: 12px; color: var(--accent-cyan);"></i> คอนเทนเนอร์ Docker:</span>
+                                        <span id="vps-docker-count" style="font-size: 0.65rem; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 10px; border: 1px solid var(--border-color); color: var(--accent-cyan); font-family: var(--font-english); font-weight: 600;">0</span>
+                                    </div>
+                                    <div id="vps-docker-list" style="max-height: 80px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.7rem; font-family: var(--font-english);">
+                                        <div style="color: var(--text-muted); text-align: center; padding: 0.25rem 0; font-family: var(--font-thai);">กำลังโหลด...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brief-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="vps-uptime"><i data-lucide="clock" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> เปิดใช้งานแล้ว: --</span>
+                                <span id="vps-refresh-time" style="font-size: 0.7rem; color: var(--text-muted)">--</span>
+                            </div>
+                        </div>
+
+                        <!-- 5. Quick Sticky Notes (wide) -->
+                        <div class="dashboard-card sticky-notes-widget draggable-card widget-wide" id="widget-notes" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.75rem;">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="sticky-note"></i> สมุดโน้ตบันทึกด่วน (Color Sticky Notes)</h3>
+                                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                                    <button id="btn-add-note" class="btn-primary" style="padding: 0.35rem 0.75rem; font-size: 0.72rem; border-radius: 6px; display: flex; align-items: center; gap: 0.25rem; border: none; cursor: pointer; color: white;">
+                                        <i data-lucide="plus" style="width: 12px; height: 12px;"></i> เพิ่มโน้ต
+                                    </button>
+                                    <button id="btn-copy-notes" class="btn-icon" title="คัดลอกโน้ตทั้งหมด"><i data-lucide="copy"></i></button>
+                                    <button id="btn-export-notes" class="btn-icon" title="ดาวน์โหลดเป็น .txt"><i data-lucide="download"></i></button>
+                                    <button id="btn-clear-notes" class="btn-icon" title="ล้างโน้ตทั้งหมด"><i data-lucide="trash-2"></i></button>
+                                </div>
+                            </div>
+                            <!-- Notes Grid Container -->
+                            <div id="sticky-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.85rem; width: 100%;">
+                                <!-- Dynamic Sticky Note Cards go here -->
+                            </div>
+                        </div>
+
+                        <!-- 6. Traffic Brief Card -->
+                        <div class="dashboard-card traffic-brief draggable-card" id="widget-traffic" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="brief-header">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab;"></i> ดัชนีจราจร & การเดินทาง</span>
+                                <button class="btn-detail-link" onclick="switchTab('traffic')">
+                                    <span>ดูรายละเอียด</span> <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                                </button>
+                            </div>
+                            <div class="brief-body">
+                                <div class="traffic-status-text" id="dash-traffic-status">
+                                    การจราจรปานกลาง
+                                </div>
+                                <div class="transit-brief-info">
+                                    <span class="badge bts-badge">BTS ปกติ</span>
+                                    <span class="badge mrt-badge">MRT ปกติ</span>
+                                </div>
+                            </div>
+                            <div class="brief-footer">
+                                <span>เช็กเส้นทางเดินรถและอัตราค่าโดยสาร</span>
+                            </div>
+                        </div>
+
+                        <!-- 7. Quick Shortcuts Widget (wide) -->
+                        <div class="dashboard-card shortcuts-widget draggable-card widget-wide" id="widget-shortcuts" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.75rem;">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="bookmark" class="text-cyan"></i> ทางลัดและบุ๊กมาร์ก (Bookmarks)</h3>
+                                <button id="btn-toggle-add-shortcut" class="btn-icon" title="เพิ่มทางลัดใหม่" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 6px; padding: 3px 6px; display: flex; align-items: center; gap: 0.2rem; cursor: pointer; border: none; outline: none; color: var(--text-main);"><i data-lucide="plus" style="width: 12px; height: 12px;"></i> <span style="font-family:var(--font-thai); font-size: 0.65rem; font-weight: 500;">เพิ่มลิงก์</span></button>
+                            </div>
+                            
+                            <!-- Inline Add Form -->
+                            <div id="shortcut-add-form" style="display: none; background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.75rem; margin-bottom: 0.75rem; flex-direction: column; gap: 0.5rem; font-family: var(--font-thai);">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="text" id="shortcut-title" placeholder="ชื่อเว็บ เช่น Google" class="form-control" style="font-size: 0.75rem; padding: 0.4rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; color: white; outline: none; width: 40%; box-sizing: border-box;">
+                                    <input type="url" id="shortcut-url" placeholder="URL เช่น https://google.com" class="form-control" style="font-size: 0.75rem; padding: 0.4rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; color: white; outline: none; width: 60%; box-sizing: border-box;">
+                                </div>
+                                <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+                                    <button id="btn-cancel-shortcut" class="btn-secondary" style="font-size: 0.65rem; padding: 0.25rem 0.5rem; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: white;">ยกเลิก</button>
+                                    <button id="btn-save-shortcut" class="btn-primary" style="font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer; background: var(--primary-color); border: none; color: white;">บันทึก</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Shortcuts Grid -->
+                            <div id="shortcuts-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.65rem;">
+                                <!-- Dynamic links -->
+                            </div>
+                        </div>
+
+                        <!-- 8. Sticky Notes Todo Checklist -->
+                        <div class="dashboard-card todo-widget draggable-card" id="widget-checklist" draggable="true">
+                            <div class="card-header">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="check-square" class="text-blue"></i> สิ่งที่ต้องทำวันนี้</h3>
+                            </div>
+                            <div class="todo-input-row" style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
+                                <input type="text" id="dash-todo-input" placeholder="เพิ่มงานหรือสิ่งที่ต้องทำ..." class="form-control" style="flex:1;">
+                                <button id="btn-dash-add-todo" class="btn-primary" style="padding: 0 0.8rem;"><i data-lucide="plus"></i></button>
+                            </div>
+                            <ul class="todo-list" id="dash-todo-list-container" style="max-height: 150px; overflow-y: auto;">
+                                <!-- Dynamic Todo Items -->
+                            </ul>
+                        </div>
+
+                        <!-- 9. Habit Tracker Widget (wide) -->
+                        <div class="dashboard-card habit-tracker-widget draggable-card widget-wide" id="widget-habits" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                                <h3 style="font-size: 1.0rem; display: flex; align-items: center; margin: 0;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="calendar-check-2" style="margin-right: 0.5rem; color: var(--accent-green);"></i> ติดตามนิสัยประจำวัน (Habit Tracker)</h3>
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <select id="habit-select" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.25rem 0.5rem; color: white; font-family: var(--font-thai); font-size: 0.75rem; outline: none; cursor: pointer;">
+                                        <option value="water">🥛 ดื่มน้ำวันละ 2 ลิตร</option>
+                                        <option value="exercise">💪 ออกกำลังกาย 30 นาที</option>
+                                        <option value="read">📚 อ่านหนังสือ 15 หน้า</option>
+                                        <option value="sleep">🛌 นอนหลับครบ 8 ชม.</option>
+                                        <option value="code">💻 ฝึกเขียนโค้ด / พัฒนาตนเอง</option>
+                                    </select>
+                                    <button id="btn-habit-complete-today" class="btn-primary" style="font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 6px; display: flex; align-items: center; gap: 0.25rem; cursor: pointer; border: none;"><i data-lucide="check" style="width: 12px; height: 12px;"></i> ทำแล้ววันนี้</button>
+                                </div>
+                            </div>
+                            
+                            <!-- The Grid -->
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(0,0,0,0.1); padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03);">
+                                <div id="habit-grid" style="display: grid; grid-template-rows: repeat(7, 12px); grid-auto-flow: column; gap: 4px; width: 100%; overflow-x: auto; padding-bottom: 2px;">
+                                    <!-- 7 rows of cells, growing dynamically as columns -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10. Online Radio Widget -->
+                        <div class="dashboard-card radio-widget draggable-card" id="widget-radio" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.85rem;">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="radio" class="text-pink"></i> วิทยุออนไลน์ Siam Daily</h3>
+                                <div class="radio-visualizer-mini" id="dash-radio-visualizer" style="display: flex; gap: 2px; align-items: flex-end; height: 12px; margin-right: 0.25rem;">
+                                    <span class="bar" style="width: 2px; height: 4px; background: var(--accent-pink); border-radius: 1px;"></span>
+                                    <span class="bar" style="width: 2px; height: 8px; background: var(--accent-pink); border-radius: 1px;"></span>
+                                    <span class="bar" style="width: 2px; height: 5px; background: var(--accent-pink); border-radius: 1px;"></span>
+                                    <span class="bar" style="width: 2px; height: 7px; background: var(--accent-pink); border-radius: 1px;"></span>
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+                                <div style="display: flex; gap: 0.5rem; align-items: center; background: rgba(0,0,0,0.15); padding: 0.5rem; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <button id="dash-btn-radio-play" class="btn-primary" style="width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; background: var(--accent-pink); border-color: var(--accent-pink); flex-shrink: 0; cursor: pointer; border: none; outline: none;">
+                                        <i data-lucide="play" id="dash-radio-play-icon" style="width: 14px; height: 14px; color: #fff;"></i>
+                                    </button>
+                                    <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px;">
+                                        <select id="dash-radio-station-select" style="background: transparent; border: none; padding: 0; color: var(--text-main); font-family: var(--font-thai); font-size: 0.78rem; font-weight: 600; outline: none; cursor: pointer; width: 100%; text-overflow: ellipsis;">
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm1005" style="background: var(--bg-surface); color: var(--text-main);" selected>FM 100.5 ข่าวสาร</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm99" style="background: var(--bg-surface); color: var(--text-main);">FM 99.0 คลื่นกีฬา</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm965" style="background: var(--bg-surface); color: var(--text-main);">FM 96.5 ความคิด</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm107" style="background: var(--bg-surface); color: var(--text-main);">FM 107.0 MET Pop</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm95" style="background: var(--bg-surface); color: var(--text-main);">FM 95.0 ลูกทุ่ง</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm1055" style="background: var(--bg-surface); color: var(--text-main);">FM 105.5 MCOT</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/fm975" style="background: var(--bg-surface); color: var(--text-main);">FM 97.5 Active Radio</option>
+                                            <option value="/api/radio-proxy?url=http://rstream.mcot.net:8000/Radio_Sat" style="background: var(--bg-surface); color: var(--text-main);">MCOT Satellite Radio</option>
+                                        </select>
+                                        <span id="dash-radio-status" style="font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-thai);">สถานะ: ปิดอยู่</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; background: rgba(0,0,0,0.1); padding: 0.4rem 0.6rem; border-radius: 8px;">
+                                    <button id="dash-btn-radio-mute" style="background: none; border: none; padding: 0; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i data-lucide="volume-2" id="dash-radio-volume-icon" style="width: 14px; height: 14px;"></i>
+                                    </button>
+                                    <input type="range" id="dash-radio-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex-grow: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; cursor: pointer; accent-color: var(--accent-pink);">
+                                    <span id="dash-radio-volume-label" style="font-size: 0.65rem; color: var(--text-muted); width: 25px; text-align: right; font-family: var(--font-english);">80%</span>
+                                </div>
+                                <canvas id="radio-visualizer-canvas" style="width: 100%; height: 42px; background: rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid var(--border-color); display: block; margin-top: 0.4rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 11. News Snippet Column (wide) -->
+                        <div class="dashboard-card news-snippet-widget draggable-card widget-wide" id="widget-news" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="newspaper"></i> เกาะติดข่าววันนี้</h3>
+                                <span class="view-all-link" onclick="switchTab('news')">ดูทั้งหมด <i data-lucide="arrow-right"></i></span>
+                            </div>
+                            <div class="news-list-mini" id="news-mini-container">
+                                <!-- Dynamic news item -->
+                                <div class="mini-news-loading">กำลังโหลดข่าวสารล่าสุด...</div>
+                            </div>
+                        </div>
+
+                        <!-- 12. Pomodoro Focus Timer & Ambient Sounds Widget -->
+                        <div class="dashboard-card pomodoro-widget draggable-card" id="widget-pomodoro" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.6rem;">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="timer" class="text-purple"></i> โฟกัส Pomodoro & เสียงธรรมชาติ</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                                <div id="dash-pomo-display" style="font-size: 2.2rem; font-family: var(--font-english); font-weight: 700; color: var(--accent-purple); letter-spacing: -0.5px; margin: 0.2rem 0;">25:00</div>
+                                <div id="dash-pomo-status" style="font-size: 0.75rem; font-family: var(--font-thai); color: var(--text-muted); margin-bottom: 0.4rem;">พร้อมที่จะตั้งสมาธิหรือยังคะ?</div>
+                                
+                                <div style="display: flex; gap: 0.4rem; width: 100%; justify-content: center; align-items: center;">
+                                    <button id="dash-btn-pomo-start" class="btn-primary" style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 6px; display: flex; align-items: center; gap: 0.25rem; border: none; cursor: pointer;">
+                                        <i data-lucide="play" id="dash-pomo-play-icon" style="width: 12px; height: 12px;"></i> <span id="dash-pomo-start-text">เริ่มโฟกัส</span>
+                                    </button>
+                                    <button id="dash-btn-pomo-reset" class="btn-secondary" style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 6px; display: flex; align-items: center; gap: 0.25rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: white; cursor: pointer;">
+                                        <i data-lucide="rotate-ccw" style="width: 12px; height: 12px;"></i> รีเซ็ต
+                                    </button>
+                                    <select id="dash-pomo-type-select" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.35rem 0.4rem; color: white; font-family: var(--font-thai); font-size: 0.75rem; cursor: pointer; outline: none;">
+                                        <option value="25">🍅 ทำงาน (25m)</option>
+                                        <option value="5">☕ พักสั้น (5m)</option>
+                                        <option value="15">🌴 พักยาว (15m)</option>
+                                    </select>
+                                </div>
+
+                                <div style="border-top: 1px solid var(--border-color); width: 100%; margin-top: 0.65rem; padding-top: 0.65rem;">
+                                    <select id="dash-pomo-ambient-select" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.35rem 0.5rem; color: white; font-family: var(--font-thai); font-size: 0.72rem; width: 100%; cursor: pointer; outline: none;">
+                                        <option value="none">🔇 ปิดเสียงธรรมชาติบำบัด</option>
+                                        <option value="rain">🌧️ เสียงฝนตกโปรยปราย</option>
+                                        <option value="waves">🌊 เสียงคลื่นทะเลซัดสาด</option>
+                                        <option value="forest">🌲 เสียงนกร้องและป่าไม้</option>
+                                        <option value="cafe">☕ เสียงบรรยากาศร้านกาแฟ</option>
+                                    </select>
+                                    
+                                    <div id="dash-pomo-ambient-vol-container" style="display: none; align-items: center; gap: 0.5rem; margin-top: 0.5rem; justify-content: space-between;">
+                                        <i data-lucide="volume-2" style="width: 12px; height: 12px; color: var(--text-muted); flex-shrink: 0;"></i>
+                                        <input type="range" id="dash-pomo-ambient-volume" min="0" max="1" step="0.05" value="0.5" style="flex-grow: 1; height: 3px; background: rgba(255,255,255,0.1); border-radius: 1.5px; cursor: pointer; accent-color: var(--accent-purple);">
+                                        <span id="dash-pomo-ambient-volume-label" style="font-size: 0.65rem; color: var(--text-muted); width: 25px; text-align: right; font-family: var(--font-english); flex-shrink: 0;">50%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 13. Mini Expense Tracker -->
+                        <div class="dashboard-card expense-widget draggable-card" id="widget-expense" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.75rem;">
+                                <h3 style="font-size: 1rem;"><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="wallet"></i> บันทึกรายจ่ายด่วน</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="number" id="dash-expense-amount" placeholder="฿ ยอดเงิน" style="width: 40%; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: var(--font-english); box-sizing: border-box;">
+                                    <select id="dash-expense-category" style="width: 60%; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: var(--font-thai); cursor: pointer; box-sizing: border-box;">
+                                        <option value="food">🍔 อาหารและเครื่องดื่ม</option>
+                                        <option value="travel">🚗 การเดินทาง/น้ำมัน</option>
+                                        <option value="shopping">🛍️ ช้อปปิ้ง/สันทนาการ</option>
+                                        <option value="bills">🧾 บิลค่าไฟ/ของใช้ทั่วไป</option>
+                                        <option value="other">✨ รายจ่ายอื่นๆ</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="dash-expense-note" placeholder="บันทึกข้อความสั้นๆ..." style="width: 100%; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: var(--font-thai); box-sizing: border-box;">
+                            </div>
+                            <button id="dash-btn-add-expense" class="btn-primary" style="width: 100%; padding: 0.6rem; border-radius: 8px; display: flex; justify-content: center; align-items: center; gap: 0.5rem; cursor: pointer; transition: 0.2s;"><i data-lucide="plus-circle" style="width: 16px;"></i> บันทึกรายจ่าย</button>
+                            
+                            <!-- Expense breakdown progress bar -->
+                            <div style="margin-top: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-thai); font-size: 0.8rem; color: var(--text-muted);">
+                                    <span>ใช้จ่ายวันนี้รวม:</span>
+                                    <span><strong id="dash-expense-total" style="color: var(--accent-red); font-size: 1.05rem; font-family: var(--font-english);">0</strong> <strong>บาท</strong></span>
+                                </div>
+                                <div id="dash-expense-bar" style="display: flex; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.05); overflow: hidden; width: 100%;">
+                                    <!-- Segments representing categories will go here dynamically -->
+                                    <div id="dash-expense-bar-food" style="width: 0%; background: #ef4444; transition: width 0.3s ease;"></div>
+                                    <div id="dash-expense-bar-travel" style="width: 0%; background: #f59e0b; transition: width 0.3s ease;"></div>
+                                    <div id="dash-expense-bar-shopping" style="width: 0%; background: #06b6d4; transition: width 0.3s ease;"></div>
+                                    <div id="dash-expense-bar-bills" style="width: 0%; background: #8b5cf6; transition: width 0.3s ease;"></div>
+                                    <div id="dash-expense-bar-other" style="width: 0%; background: #10b981; transition: width 0.3s ease;"></div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; font-size: 0.6rem; font-family: var(--font-thai); color: var(--text-muted); margin-top: 0.15rem;">
+                                    <span style="display:flex;align-items:center;gap:2px;"><span style="width:6px;height:6px;background:#ef4444;border-radius:50%"></span> อาหาร (<span id="txt-exp-food">0</span>)</span>
+                                    <span style="display:flex;align-items:center;gap:2px;"><span style="width:6px;height:6px;background:#f59e0b;border-radius:50%"></span> เดินทาง (<span id="txt-exp-travel">0</span>)</span>
+                                    <span style="display:flex;align-items:center;gap:2px;"><span style="width:6px;height:6px;background:#06b6d4;border-radius:50%"></span> ช้อปปิ้ง (<span id="txt-exp-shopping">0</span>)</span>
+                                    <span style="display:flex;align-items:center;gap:2px;"><span style="width:6px;height:6px;background:#8b5cf6;border-radius:50%"></span> ค่าบิล (<span id="txt-exp-bills">0</span>)</span>
+                                    <span style="display:flex;align-items:center;gap:2px;"><span style="width:6px;height:6px;background:#10b981;border-radius:50%"></span> อื่นๆ (<span id="txt-exp-other">0</span>)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14. Gold & Crypto Market Widget -->
+                        <div class="dashboard-card finance-widget draggable-card" id="widget-finance" draggable="true">
+                            <div class="card-glow"></div>
+                            <div class="card-header" style="margin-bottom: 0.75rem;">
+                                <h3><i data-lucide="grip-horizontal" class="drag-handle" style="width: 16px; color: var(--text-muted); cursor: grab; margin-right: 0.5rem;"></i><i data-lucide="trending-up" class="text-amber"></i> ตลาดการเงินและราคาทอง</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-family: var(--font-thai);">
+                                <!-- Gold Rates -->
+                                <div style="background: rgba(0,0,0,0.15); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.5rem 0.75rem;">
+                                    <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500; display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                                        <span>ราคาทองคำแท่ง (สมาคมค้าทองคำ)</span>
+                                        <span id="dash-gold-diff" style="font-weight: 600;">--</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <span style="font-size: 0.65rem; color: var(--text-muted);">รับซื้อ:</span>
+                                            <div id="dash-gold-buy" style="font-size: 1.05rem; font-weight: 700; color: var(--accent-green); font-family: var(--font-english);">--</div>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <span style="font-size: 0.65rem; color: var(--text-muted);">ขายออก:</span>
+                                            <div id="dash-gold-sell" style="font-size: 1.05rem; font-weight: 700; color: var(--accent-red); font-family: var(--font-english);">--</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Crypto Rates -->
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <!-- BTC -->
+                                    <div style="width: 50%; background: rgba(0,0,0,0.15); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.5rem 0.75rem; box-sizing: border-box;">
+                                        <div style="font-size: 0.72rem; font-weight: 600; color: #f7931a; display:flex; justify-content:space-between; align-items:center;">
+                                            <span>Bitcoin</span>
+                                            <span id="dash-crypto-btc-change" style="font-size: 0.65rem;">--</span>
+                                        </div>
+                                        <div id="dash-crypto-btc" style="font-size: 0.95rem; font-weight: 700; color: white; font-family: var(--font-english); margin-top: 0.25rem;">$--,---</div>
+                                    </div>
+                                    
+                                    <!-- ETH -->
+                                    <div style="width: 50%; background: rgba(0,0,0,0.15); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.5rem 0.75rem; box-sizing: border-box;">
+                                        <div style="font-size: 0.72rem; font-weight: 600; color: #627eea; display:flex; justify-content:space-between; align-items:center;">
+                                            <span>Ethereum</span>
+                                            <span id="dash-crypto-eth-change" style="font-size: 0.65rem;">--</span>
+                                        </div>
+                                        <div id="dash-crypto-eth" style="font-size: 0.95rem; font-weight: 700; color: white; font-family: var(--font-english); margin-top: 0.25rem;">$--,---</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-thai); border-top: 1px solid var(--border-color); margin-top: 0.65rem; padding-top: 0.5rem;">
+                                <span>อัปเดตเรียลไทม์อัตโนมัติ</span>
+                                <span id="dash-finance-update">อัปเดต: --:--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget Manager Modal -->
+                    <div id="widget-manager-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; font-family: var(--font-thai);">
+                        <div style="background: rgba(22, 28, 54, 0.95); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; width: 90%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 1rem; max-height: 80vh;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-lucide="settings" style="width: 18px; height: 18px; color: var(--accent-cyan);"></i> จัดการวิดเจ็ตแดชบอร์ด
+                                </h3>
+                                <button id="btn-close-widget-modal" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.25rem; border: none; outline: none;">&times;</button>
+                            </div>
+                            <div id="widget-manager-list" style="display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; max-height: 50vh; padding-right: 0.25rem;">
+                                <!-- Rows will be rendered dynamically here -->
+                            </div>
+                            <div style="display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                                <button id="btn-save-widgets" class="btn-primary" style="padding: 0.5rem 1.25rem; border-radius: 8px; font-family: var(--font-thai); font-weight: 500; font-size: 0.85rem; cursor: pointer; border: none;">เสร็จสิ้น</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>

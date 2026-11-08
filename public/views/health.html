@@ -1,0 +1,293 @@
+<!-- Health & Focus View -->
+<div class="health-focus-container" style="font-family: var(--font-thai); display: flex; flex-direction: column; gap: 1.5rem; animation: fadeIn 0.4s ease;">
+    <div>
+        <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="heart" style="color: var(--accent-pink);"></i> สุขภาพ & สมาธิ (Health & Focus)</h3>
+        <p style="margin: 3px 0 0; font-size: 0.8rem; color: var(--text-muted);">เครื่องมือเพื่อดูแลสุขภาพและช่วยเสริมสมาธิในชีวิตประจำวัน</p>
+    </div>
+
+    <!-- Health Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+        <!-- Pomodoro Timer Card -->
+        <div class="dashboard-card pomodoro-card">
+            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.12), transparent 60%);"></div>
+            <div class="card-header">
+                <h3><i data-lucide="timer" class="text-red"></i> Pomodoro Timer</h3>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-thai);">
+                <div id="pomodoro-display" style="font-size: 3.5rem; font-weight: 700; font-family: var(--font-english); color: var(--accent-red); letter-spacing: 2px;">25:00</div>
+                <div id="pomodoro-label" style="font-size: 0.8rem; color: var(--text-muted);">โหมด: ทำงาน (25 นาที)</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="btn-pomodoro-start" class="btn-primary" style="padding: 0.4rem 1.25rem; font-size: 0.85rem; background: var(--accent-red); border-color: var(--accent-red);">
+                        <i data-lucide="play" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> เริ่ม
+                    </button>
+                    <button id="btn-pomodoro-reset" class="btn-secondary" style="padding: 0.4rem 1.25rem; font-size: 0.85rem;">
+                        <i data-lucide="rotate-ccw" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> รีเซ็ต
+                    </button>
+                </div>
+                <div style="display: flex; gap: 0.5rem; font-size: 0.75rem;">
+                    <button class="btn-secondary pomodoro-mode-btn" data-mode="work" style="padding: 0.2rem 0.6rem; font-size: 0.7rem; opacity: 1;">ทำงาน 25'</button>
+                    <button class="btn-secondary pomodoro-mode-btn" data-mode="short" style="padding: 0.2rem 0.6rem; font-size: 0.7rem; opacity: 0.6;">พักสั้น 5'</button>
+                    <button class="btn-secondary pomodoro-mode-btn" data-mode="long" style="padding: 0.2rem 0.6rem; font-size: 0.7rem; opacity: 0.6;">พักยาว 15'</button>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">รอบที่ทำสำเร็จ: <span id="pomodoro-count" style="color: var(--accent-red); font-weight: 600; font-family: var(--font-english);">0</span></div>
+            </div>
+        </div>
+
+        <!-- Water Tracker Card -->
+        <div class="dashboard-card water-tracker-card">
+            <div class="card-header">
+                <h3><i data-lucide="glass-water" class="text-cyan"></i> บันทึกการดื่มน้ำรายวัน</h3>
+                <button id="btn-reset-water" class="btn-icon-small" title="เริ่มใหม่"><i data-lucide="refresh-cw" style="width:12px; height:12px;"></i></button>
+            </div>
+            <div class="water-tracker-body" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; font-family: var(--font-thai);">
+                <div class="water-progress-container" style="position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center;">
+                    <svg width="140" height="140" viewBox="0 0 120 120" style="transform: rotate(-90deg);">
+                        <circle cx="60" cy="60" r="50" stroke="var(--border-color)" stroke-width="8" fill="transparent"></circle>
+                        <circle id="water-progress-bar" cx="60" cy="60" r="50" stroke="var(--accent-cyan)" stroke-width="8" fill="transparent" stroke-dasharray="314.16" stroke-dashoffset="314.16" style="transition: stroke-dashoffset 0.5s ease-in-out; stroke-linecap: round;"></circle>
+                    </svg>
+                    <div class="water-percentage-label" style="position: absolute; display: flex; flex-direction: column; align-items: center;">
+                        <span id="water-percent" style="font-family: var(--font-english); font-size: 1.7rem; font-weight: 700; color: var(--accent-cyan);">0%</span>
+                        <span id="water-ml-label" style="font-size: 0.8rem; color: var(--text-muted);">0 / 2000 มล.</span>
+                    </div>
+                </div>
+                <div class="water-glass-display" id="water-glass-display" style="display: flex; gap: 0.35rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.25rem; min-height: 20px;">
+                    <!-- Dynamic glass icons -->
+                </div>
+                <div class="water-buttons" style="display: flex; gap: 0.5rem; width: 100%;">
+                    <button id="btn-add-water-250" class="btn-secondary w-50" style="padding: 0.45rem 0; font-size: 0.8rem;">+250 มล. (1 แก้ว)</button>
+                    <button id="btn-add-water-600" class="btn-primary w-50" style="padding: 0.45rem 0; font-size: 0.8rem; background: var(--accent-cyan); border-color: var(--accent-cyan);">+600 มล. (ขวดเล็ก)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calorie & BMI Card -->
+        <div class="dashboard-card health-calc-card">
+            <div class="card-header">
+                <h3><i data-lucide="heart-pulse" class="text-green"></i> เครื่องคำนวณแคลอรี &amp; BMI</h3>
+            </div>
+            <div class="health-calc-body" style="display: flex; flex-direction: column; gap: 0.75rem; font-family: var(--font-thai);">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>น้ำหนัก (กก.)</label>
+                        <input type="number" id="health-weight" class="form-control" style="font-family: var(--font-english);" placeholder="60">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>ส่วนสูง (ซม.)</label>
+                        <input type="number" id="health-height" class="form-control" style="font-family: var(--font-english);" placeholder="170">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>อายุ (ปี)</label>
+                        <input type="number" id="health-age" class="form-control" style="font-family: var(--font-english);" placeholder="25">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>เพศ</label>
+                        <select id="health-gender" class="form-control" style="font-family: var(--font-thai); font-size: 0.85rem;">
+                            <option value="male">ชาย</option>
+                            <option value="female">หญิง</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>ระดับการทำกิจกรรม</label>
+                    <select id="health-activity" class="form-control" style="font-family: var(--font-thai); font-size: 0.8rem;">
+                        <option value="1.2">นั่งทำงานอยู่กับที่ ไม่ค่อยออกกำลังกาย</option>
+                        <option value="1.375">ออกกำลังกายเบาๆ (1-3 วัน/สัปดาห์)</option>
+                        <option value="1.55">ออกกำลังกายปานกลาง (3-5 วัน/สัปดาห์)</option>
+                        <option value="1.725">ออกกำลังกายหนัก (6-7 วัน/สัปดาห์)</option>
+                        <option value="1.9">ออกกำลังกายหนักมาก / ทำงานใช้แรงงานเยอะ</option>
+                    </select>
+                </div>
+                <button id="btn-calc-health" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-green); border-color: var(--accent-green);">คำนวณผลลัพธ์</button>
+                
+                <div id="health-results" style="display: none; border-top: 1px dashed var(--border-color); padding-top: 0.75rem; font-size: 0.8rem; line-height: 1.5;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                        <span>BMI: <strong id="health-res-bmi" class="text-green">--</strong></span>
+                        <span id="health-res-bmi-status" style="font-weight: 600;">--</span>
+                    </div>
+                    <div style="height: 6px; background: var(--border-color); border-radius: 3px; position: relative; margin-bottom: 0.5rem; overflow: hidden;">
+                        <div id="health-bmi-indicator" style="height: 100%; width: 0; background: var(--accent-green); transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>อัตราเผาผลาญพื้นฐาน (BMR):</span>
+                        <strong id="health-res-bmr">-- kcal</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>พลังงานที่ต้องการต่อวัน (TDEE):</span>
+                        <strong id="health-res-tdee" class="text-green">-- kcal</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breathing Guide Card -->
+        <div class="dashboard-card breathing-guide-card">
+            <div class="card-header">
+                <h3><i data-lucide="wind" class="text-blue"></i> วงล้อหายใจลดความเครียด</h3>
+            </div>
+            <div class="breathing-guide-body" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; font-family: var(--font-thai);">
+                <div class="breathing-circle-wrapper" style="position: relative; width: 160px; height: 160px; display: flex; align-items: center; justify-content: center;">
+                    <div id="breathing-outer-ring" style="position: absolute; width: 100%; height: 100%; border: 2px dashed rgba(59, 130, 246, 0.3); border-radius: 50%;"></div>
+                    <div id="breathing-ball" style="width: 70px; height: 70px; background: radial-gradient(circle, var(--accent-blue) 0%, rgba(59, 130, 246, 0.6) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--accent-blue); transition: width 4s ease-in-out, height 4s ease-in-out, transform 4s ease-in-out;">
+                        <span id="breathing-inside-text" style="color: #fff; font-size: 0.8rem; font-weight: 600;">หายใจเข้า</span>
+                    </div>
+                </div>
+                <div class="breathing-controls" style="width: 100%; display: flex; flex-direction: column; gap: 0.4rem;">
+                    <span id="breathing-tip" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">ฝึกสมาธิ Box Breathing 4-4-4</span>
+                    <button id="btn-toggle-breathing" class="btn-primary w-100" style="padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-blue); border-color: var(--accent-blue);">
+                        <i data-lucide="play" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> เริ่มต้นฝึกหายใจ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Focus Ambient Sound Mixer -->
+        <div class="dashboard-card ambient-mixer-card">
+            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.08), transparent 60%);"></div>
+            <div class="card-header">
+                <h3><i data-lucide="headphones" class="text-cyan"></i> เสียงบำบัดธรรมชาติช่วยสมาธิ</h3>
+                <button id="btn-stop-all-ambient" class="btn-icon-small" title="ปิดเสียงทั้งหมด"><i data-lucide="square" style="width:12px; height:12px;"></i></button>
+            </div>
+            <div class="ambient-mixer-body" style="display: flex; flex-direction: column; gap: 0.65rem; font-family: var(--font-thai);">
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">เลื่อนเพื่อเปิดและผสมระดับความดังเสียง:</div>
+                <!-- Sound 1: Rain -->
+                <div class="ambient-sound-row" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 65px; font-size: 0.75rem; font-weight: 500;">🌧️ ฝนตก</span>
+                    <input type="range" class="ambient-slider" data-sound="rain" min="0" max="1" step="0.05" value="0" style="flex-grow: 1; accent-color: var(--accent-cyan); height: 4px;">
+                </div>
+                <!-- Sound 2: Waves -->
+                <div class="ambient-sound-row" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 65px; font-size: 0.75rem; font-weight: 500;">🌊 คลื่นทะเล</span>
+                    <input type="range" class="ambient-slider" data-sound="waves" min="0" max="1" step="0.05" value="0" style="flex-grow: 1; accent-color: var(--accent-cyan); height: 4px;">
+                </div>
+                <!-- Sound 3: Forest -->
+                <div class="ambient-sound-row" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 65px; font-size: 0.75rem; font-weight: 500;">🍃 ลำธารป่า</span>
+                    <input type="range" class="ambient-slider" data-sound="forest" min="0" max="1" step="0.05" value="0" style="flex-grow: 1; accent-color: var(--accent-cyan); height: 4px;">
+                </div>
+                <!-- Sound 4: Cafe -->
+                <div class="ambient-sound-row" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 65px; font-size: 0.75rem; font-weight: 500;">☕ ร้านกาแฟ</span>
+                    <input type="range" class="ambient-slider" data-sound="cafe" min="0" max="1" step="0.05" value="0" style="flex-grow: 1; accent-color: var(--accent-cyan); height: 4px;">
+                </div>
+                <!-- Sleep Timer Section -->
+                <div style="margin-top: 0.6rem; border-top: 1px solid var(--border-color); padding-top: 0.6rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                    <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted); display:flex; align-items:center; gap:0.25rem;"><i data-lucide="timer" style="width:12px;height:12px;color:var(--accent-cyan);"></i> ตั้งเวลาปิด:</span>
+                    <div style="display: flex; gap: 0.25rem; align-items: center;">
+                        <select id="ambient-timer-select" style="background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-main); font-family: var(--font-thai); font-size: 0.7rem; padding: 2px 4px; border-radius: 6px; outline: none; cursor: pointer;">
+                            <option value="0">ไม่ตั้งเวลา</option>
+                            <option value="15">15 นาที</option>
+                            <option value="30">30 นาที</option>
+                            <option value="45">45 นาที</option>
+                            <option value="60">60 นาที</option>
+                        </select>
+                        <span id="ambient-timer-countdown" style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600; display: none; font-family: var(--font-english);">00:00</span>
+                    </div>
+                </div>
+
+                <button id="btn-trigger-focus-mode" class="btn-primary" style="margin-top: 0.75rem; padding: 0.5rem 0; font-size: 0.8rem; background: var(--accent-pink); border-color: var(--accent-pink); width: 100%; display: flex; justify-content: center; align-items: center; gap: 0.4rem; cursor: pointer; border: none; border-radius: 8px; font-family: var(--font-thai); font-weight: 600;">
+                    <i data-lucide="expand" style="width: 14px; height: 14px;"></i> เปิดโหมดโฟกัสเต็มหน้าจอ (Focus Mode)
+                </button>
+            </div>
+        </div>
+
+        <!-- Binaural Beats Card -->
+        <div class="dashboard-card binaural-card">
+            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.1), transparent 60%);"></div>
+            <div class="card-header">
+                <h3><i data-lucide="brain-circuit" class="text-purple"></i> คลื่นเสียงบำบัดสมาธิ (Binaural Beats)</h3>
+                <span style="font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border-color); padding: 1px 4px; border-radius: 4px; display: flex; align-items: center; gap: 2px;"><i data-lucide="headphones" style="width: 10px; height: 10px;"></i> ต้องใช้หูฟัง</span>
+            </div>
+            <div class="binaural-body" style="display: flex; flex-direction: column; gap: 0.65rem; font-family: var(--font-thai);">
+                <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">เสียงคลื่นความถี่ต่างกันในหูซ้าย-ขวา ช่วยจูนสมองเข้าสู่สมาธิหรือผ่อนคลาย</div>
+                
+                <div class="form-group" style="margin-bottom: 0.25rem;">
+                    <label style="font-size: 0.75rem; font-weight: 600;">เลือกโหมดคลื่นสมอง</label>
+                    <select id="binaural-preset-select" class="form-control" style="font-size: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-main);">
+                        <option value="alpha">🧠 Alpha Wave (10Hz) - เสริมสมาธิและการเรียนรู้</option>
+                        <option value="theta">🧘 Theta Wave (6Hz) - ทำสมาธิลึกและสร้างสรรค์</option>
+                        <option value="beta">⚡ Beta Wave (20Hz) - ตื่นตัว กระฉับกระเฉง</option>
+                        <option value="delta">😴 Delta Wave (2.5Hz) - พักผ่อนลึก หลับสนิท</option>
+                        <option value="solfeggio-528">✨ Solfeggio 528Hz - คลื่นซ่อมแซม DNA และปรับพลังบวก</option>
+                        <option value="solfeggio-432">🪐 Solfeggio 432Hz - คลื่นปรับคลื่นสมองสู่ความสมดุลโลก</option>
+                    </select>
+                </div>
+
+                <!-- Live readout -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.4rem 0.6rem; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-english);">
+                    <div style="color: var(--text-muted);">
+                        ซ้าย: <span id="binaural-freq-left" style="color: var(--accent-purple); font-weight: 600;">200 Hz</span> | ขวา: <span id="binaural-freq-right" style="color: var(--accent-purple); font-weight: 600;">210 Hz</span>
+                    </div>
+                    <div style="font-weight: 600; color: var(--accent-purple);" id="binaural-beat-label">
+                        Beat: 10 Hz (Alpha)
+                    </div>
+                </div>
+
+                <!-- Stereo visualizer animation container -->
+                <div style="height: 35px; background: rgba(0, 0, 0, 0.15); border-radius: 8px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin: 0.25rem 0;">
+                    <div id="binaural-wave-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; display: flex; align-items: center; justify-content: space-around; padding: 0 10px; opacity: 0.3;">
+                        <!-- Custom CSS lines to animate left and right -->
+                        <div class="binaural-bar" style="width: 3px; height: 10px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 18px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 14px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 22px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 16px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 25px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 12px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 19px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                        <div class="binaural-bar" style="width: 3px; height: 10px; background: var(--accent-purple); border-radius: 1px; transition: height 0.1s;"></div>
+                    </div>
+                    <span id="binaural-status-text" style="font-size: 0.7rem; color: var(--text-muted); z-index: 2; pointer-events: none;">🔊 ปิดเสียงอยู่</span>
+                </div>
+
+                <!-- Volume control -->
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.2rem;">
+                    <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 3px;"><i data-lucide="volume-2" style="width:12px; height:12px;"></i> ระดับเสียง:</span>
+                    <input type="range" id="binaural-volume" min="0" max="0.3" step="0.01" value="0.1" style="flex-grow: 1; accent-color: var(--accent-purple); height: 4px; cursor: pointer;">
+                    <span id="binaural-volume-display" style="font-size: 0.7rem; font-family: var(--font-english); width: 25px; text-align: right; color: var(--text-muted);">33%</span>
+                </div>
+
+                <button id="btn-binaural-play" class="btn-primary w-100" style="margin-top: 0.5rem; padding: 0.45rem 0; font-size: 0.85rem; background: var(--accent-purple); border-color: var(--accent-purple); display: flex; justify-content: center; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="play" style="width:14px; height:14px;"></i> เล่นคลื่นเสียงบำบัด
+                </button>
+            </div>
+        </div>
+
+        <!-- Posture & Eye strain reminder Card -->
+        <div class="dashboard-card posture-timer-card">
+            <div class="card-glow" style="background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.1), transparent 60%);"></div>
+            <div class="card-header">
+                <h3><i data-lucide="accessibility" class="text-amber"></i> ปรับสรีระ &amp; พักสายตา (20-20-20 Rule)</h3>
+            </div>
+            <div class="posture-timer-body" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; text-align: center; font-family: var(--font-thai);">
+                <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; width: 100%;">ป้องกัน Office Syndrome: ทำงาน 20 นาที พักสายตามองไกล 20 วินาที และปรับท่ายืดตัวตรง</div>
+                
+                <div class="posture-progress-container" style="position: relative; width: 130px; height: 130px; display: flex; align-items: center; justify-content: center; margin: 0.25rem 0;">
+                    <svg width="130" height="130" viewBox="0 0 120 120" style="transform: rotate(-90deg);">
+                        <circle cx="60" cy="60" r="50" stroke="var(--border-color)" stroke-width="7" fill="transparent"></circle>
+                        <circle id="posture-progress-bar" cx="60" cy="60" r="50" stroke="var(--accent-amber)" stroke-width="7" fill="transparent" stroke-dasharray="314.16" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear; stroke-linecap: round;"></circle>
+                    </svg>
+                    <div style="position: absolute; display: flex; flex-direction: column; align-items: center;">
+                        <span id="posture-timer-display" style="font-family: var(--font-english); font-size: 1.7rem; font-weight: 700; color: var(--accent-amber);">20:00</span>
+                        <span id="posture-state-label" style="font-size: 0.7rem; color: var(--text-muted); max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ทำงาน / โฟกัส</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 0.4rem; width: 100%;">
+                    <button id="btn-toggle-posture-timer" class="btn-primary w-50" style="padding: 0.45rem 0; font-size: 0.8rem; background: var(--accent-amber); border-color: var(--accent-amber); display: flex; justify-content: center; align-items: center; gap: 3px;">
+                        <i data-lucide="play" style="width:12px; height:12px;"></i> เริ่มจับเวลา
+                    </button>
+                    <button id="btn-reset-posture-timer" class="btn-secondary w-50" style="padding: 0.45rem 0; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 3px;">
+                        <i data-lucide="rotate-ccw" style="width:12px; height:12px;"></i> รีเซ็ต
+                    </button>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; width: 100%; border-top: 1px dashed var(--border-color); padding-top: 0.5rem; font-size: 0.7rem; color: var(--text-muted);">
+                    <span>ช่วงเวลาแนะนำ: 20 นาที</span>
+                    <a href="javascript:void(0)" id="btn-test-posture-alert" style="color: var(--accent-amber); font-weight: 600; text-decoration: none;">ทดสอบเสียงเตือน 🔊</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

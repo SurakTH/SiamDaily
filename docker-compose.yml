@@ -1,0 +1,25 @@
+services:
+  siam-daily-hub:
+    build: .
+    container_name: siam-daily-hub
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - NODE_ENV=production
+    volumes:
+      - ./data:/app/data
+      # Docker socket: mounted read-only (:ro) so the server can list containers
+      # (via `docker ps` only) for the VPS Control Panel. No endpoint accepts
+      # arbitrary Docker API commands. See SECURITY note in README.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/auth.log:/app/host-logs/auth.log:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

@@ -1,0 +1,141 @@
+                <section class="tab-pane" id="tab-weather">
+                    <div class="weather-grid">
+                        <!-- Main Weather Card -->
+                        <div class="dashboard-card main-weather-details">
+                            <div class="card-header-accent" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                                        <h2 style="margin: 0;">รายงานสภาพอากาศโดยละเอียด</h2>
+                                        <button id="btn-refresh-weather" class="btn-secondary" style="font-family: var(--font-thai); font-size: 0.75rem; padding: 0.25rem 0.5rem; display: flex; align-items: center; gap: 0.25rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); cursor: pointer; transition: background 0.2s;">
+                                            <i data-lucide="refresh-cw" style="width: 12px; height: 12px; color: var(--accent-teal);"></i> อัปเดตสด
+                                        </button>
+                                    </div>
+                                    <p id="weather-update-time" style="margin: 0.25rem 0 0 0;">ข้อมูลล่าสุดเมื่อ: --:--</p>
+                                </div>
+                                <div class="weather-icon-large" id="weather-main-icon">
+                                    <i data-lucide="cloud-sun"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="weather-stats-large">
+                                <div class="temp-section">
+                                    <h3 id="detail-temp">--°C</h3>
+                                    <p id="detail-weather-desc">แจ่มใส</p>
+                                    <p id="detail-temp-range">สูงสุด: --°C | ต่ำสุด: --°C</p>
+                                </div>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <i data-lucide="droplet" class="text-blue"></i>
+                                        <div>
+                                            <span>ความชื้นสัมพัทธ์</span>
+                                            <strong id="weather-humidity">--%</strong>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i data-lucide="wind" class="text-teal"></i>
+                                        <div>
+                                            <span>ความเร็วลม</span>
+                                            <strong id="weather-windspeed">-- กม./ชม.</strong>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i data-lucide="umbrella" class="text-purple"></i>
+                                        <div>
+                                            <span>โอกาสฝนตกวันนี้</span>
+                                            <strong id="weather-rain-chance">--%</strong>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i data-lucide="sun" class="text-amber"></i>
+                                        <div>
+                                            <span>ดัชนี UV</span>
+                                            <strong id="weather-uv">-- (ต่ำ)</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 24 Hours Forecast chart area -->
+                            <div class="forecast-chart-section mt-4">
+                                <h4>แนวโน้มอุณหภูมิในอีก 24 ชั่วโมงข้างหน้า</h4>
+                                <div class="forecast-chart-container" style="position: relative; height: 180px; width: 100%;">
+                                    <canvas id="hourlyTempChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PM2.5 details card -->
+                        <div class="dashboard-card pm25-details">
+                            <div class="card-header">
+                                <h3><i data-lucide="activity"></i> รายงานดัชนีคุณภาพอากาศ (AQI) & PM2.5</h3>
+                            </div>
+                            <div class="aqi-meter-wrapper">
+                                <div class="aqi-ring" id="aqi-ring-element">
+                                    <span class="aqi-val" id="detail-pm25-val">--</span>
+                                    <span class="aqi-lbl">PM 2.5 (µg/m³)</span>
+                                </div>
+                                <div class="aqi-info">
+                                    <h4 id="detail-aqi-status-text">คุณภาพอากาศปานกลาง</h4>
+                                    <p id="detail-aqi-advice">ประชาชนทั่วไป: สามารถทำกิจกรรมกลางแจ้งได้ตามปกติ</p>
+                                </div>
+                            </div>
+                            
+                            <hr class="card-divider">
+
+                            <div class="air-pollutants-grid">
+                                <div class="pollutant-bar-item">
+                                    <div class="pollutant-label"><span>PM10</span><span id="val-pm10">-- µg/m³</span></div>
+                                    <div class="progress-bar"><div class="progress" id="bar-pm10" style="width: 0%"></div></div>
+                                </div>
+                                <div class="pollutant-bar-item">
+                                    <div class="pollutant-label"><span>O₃ (โอโซน)</span><span id="val-o3">-- µg/m³</span></div>
+                                    <div class="progress-bar"><div class="progress" id="bar-o3" style="width: 0%"></div></div>
+                                </div>
+                                <div class="pollutant-bar-item">
+                                    <div class="pollutant-label"><span>NO₂ (ไนโตรเจนไดออกไซด์)</span><span id="val-no2">-- µg/m³</span></div>
+                                    <div class="progress-bar"><div class="progress" id="bar-no2" style="width: 0%"></div></div>
+                                </div>
+                            </div>
+
+                            <div class="health-tips-box mt-4">
+                                <h5><i data-lucide="shield-alert"></i> คำแนะนำด้านสุขภาพ</h5>
+                                <ul id="health-tips-list">
+                                    <li>หากฝุ่นเกิน 37.5 µg/m³ ควรสวมหน้ากากอนามัยขณะออกกลางแจ้ง</li>
+                                    <li>กลุ่มเสี่ยงควรลดระยะเวลาการทำกิจกรรมกลางแจ้ง</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7 Days forecast Grid -->
+                    <div class="dashboard-card 7days-forecast-card mt-4">
+                        <h3><i data-lucide="calendar"></i> พยากรณ์อากาศล่วงหน้า 7 วัน</h3>
+                        <div class="forecast-7days-grid" id="forecast-7days-container">
+                            <!-- Dynamic 7 days items -->
+                            <div style="display: flex; gap: 10px; width: 100%; justify-content: space-between;">
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                                <div class="skeleton" style="width: 13%; height: 120px;"></div>
+                            </div>
+                    </div>
+
+                    <!-- Animated Weather Radar & Air Quality Map -->
+                    <div class="dashboard-card weather-map-card mt-4">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; font-family: var(--font-thai);">
+                            <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem; font-weight: 600;"><i data-lucide="map" class="text-cyan" style="width: 18px; height: 18px;"></i> แผนที่สภาพอากาศ &amp; ฝุ่นละอองแบบเรียลไทม์</h3>
+                            <div class="game-select-controls" style="display: flex; gap: 0.35rem;" id="weather-map-selectors">
+                                <button class="btn-tab-small active" data-map-overlay="radar">เรดาร์ฝน</button>
+                                <button class="btn-tab-small" data-map-overlay="wind">แผนที่ลม</button>
+                                <button class="btn-tab-small" data-map-overlay="temp">อุณหภูมิ</button>
+                                <button class="btn-tab-small" data-map-overlay="pm25">ดัชนีฝุ่น PM2.5</button>
+                            </div>
+                        </div>
+                        <div class="weather-map-container" style="position: relative; width: 100%; height: 450px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2);">
+                            <iframe id="weather-map-iframe" src="https://embed.windy.com/embed2.html?lat=13.736&lon=100.523&detailLat=13.736&detailLon=100.523&width=100%&height=450&zoom=6&level=surface&overlay=radar&product=radar&menu=&message=&marker=&calendar=now&forecast=12&location=coordinates&type=map&actualforecast=aperture&metricWind=default&metricTemp=default&radarRange=3" style="width: 100%; height: 100%; border: none;"></iframe>
+                        </div>
+                    </div>
+                </section>

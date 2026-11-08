@@ -1,0 +1,399 @@
+                <section class="tab-pane" id="tab-emergency">
+                    <div class="news-header-control">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="emergency-search-input" placeholder="ค้นหาเบอร์โทรฉุกเฉิน...">
+                        </div>
+                        <div class="news-categories" id="emergency-categories">
+                            <button class="cat-btn active" data-em-cat="all">ทั้งหมด</button>
+                            <button class="cat-btn" data-em-cat="safety">เหตุด่วน & ความปลอดภัย</button>
+                            <button class="cat-btn" data-em-cat="medical">เจ็บป่วย & การแพทย์</button>
+                            <button class="cat-btn" data-em-cat="utility">หน่วยงานรัฐ & สาธารณูปโภค</button>
+                            <button class="cat-btn" data-em-cat="travel">คมนาคม & การเดินทาง</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-2" id="emergency-grid">
+                        <!-- Group 1: เหตุด่วน & ความปลอดภัย -->
+                        <div class="dashboard-card emergency-group-card" data-em-group="safety">
+                            <div class="card-glow" style="background: radial-gradient(circle at 100% 0%, rgba(239, 68, 68, 0.08), transparent 50%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="shield-alert" class="text-red"></i> เหตุด่วน & ความปลอดภัย</h3>
+                            </div>
+                            <div class="contacts-grid">
+                                <a href="tel:191" class="contact-item" data-em-keywords="191 เหตุด่วนเหตุร้าย ตำรวจ แจ้งความ สายด่วน">
+                                    <span class="number" style="color: var(--accent-red);">191</span>
+                                    <div class="info">
+                                        <strong>เหตุด่วนเหตุร้าย</strong>
+                                        <span>ตำรวจปราบปรามทั่วไป / แจ้งเหตุด่วน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:199" class="contact-item" data-em-keywords="199 ดับเพลิง กู้ภัย ไฟไหม้ สัตว์ร้าย บรรเทาสาธารณภัย">
+                                    <span class="number" style="color: var(--accent-red);">199</span>
+                                    <div class="info">
+                                        <strong>ดับเพลิง & กู้ภัย</strong>
+                                        <span>แจ้งไฟไหม้ สัตว์ร้ายเข้าบ้าน บรรเทาภัย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1155" class="contact-item" data-em-keywords="1155 ตำรวจท่องเที่ยว ช่วยเหลือ ท่องเที่ยว นักท่องเที่ยว">
+                                    <span class="number" style="color: var(--accent-red);">1155</span>
+                                    <div class="info">
+                                        <strong>ตำรวจท่องเที่ยว</strong>
+                                        <span>ช่วยเหลือและดูแลความปลอดภัยนักท่องเที่ยว</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1192" class="contact-item" data-em-keywords="1192 โจรกรรม รถหาย รถยนต์ มอเตอร์ไซค์ ขโมย">
+                                    <span class="number" style="color: var(--accent-red);">1192</span>
+                                    <div class="info">
+                                        <strong>ศูนย์ปราบปรามโจรกรรมรถ</strong>
+                                        <span>แจ้งรถหาย รถโดนขโมย หรือถูกโจรกรรม</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1195" class="contact-item" data-em-keywords="1195 ปราบปราม ตำรวจ กองปราบ เบาะแส อาชญากรรม">
+                                    <span class="number" style="color: var(--accent-red);">1195</span>
+                                    <div class="info">
+                                        <strong>กองบังคับการปราบปราม</strong>
+                                        <span>แจ้งเบาะแสอาชญากรรม คดีร้ายแรง</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1196" class="contact-item" data-em-keywords="1196 ตำรวจน้ำ กู้ภัยอุบัติเหตุทางน้ำ ท่าเรือ ทางน้ำ ค้นหาคนจมน้ำ">
+                                    <span class="number" style="color: var(--accent-red);">1196</span>
+                                    <div class="info">
+                                        <strong>ตำรวจน้ำ & อุบัติเหตุทางน้ำ</strong>
+                                        <span>แจ้งอุบัติเหตุทางน้ำ ประสานกู้ภัยทางเรือ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1300" class="contact-item" data-em-keywords="1300 สายด่วน พม ศูนย์ช่วยเหลือสังคม เด็ก สตรี ผู้สูงอายุ คนพิการ">
+                                    <span class="number" style="color: var(--accent-red);">1300</span>
+                                    <div class="info">
+                                        <strong>สายด่วน พม. (ช่วยเหลือสังคม)</strong>
+                                        <span>ช่วยเหลือเด็ก สตรี ผู้สูงอายุ และคนพิการ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1166" class="contact-item" data-em-keywords="1166 คุ้มครองผู้บริโภค สคบ ร้องเรียน สินค้าปลอม สินค้าไม่ได้มาตรฐาน โดนหลอกขาย">
+                                    <span class="number" style="color: var(--accent-red);">1166</span>
+                                    <div class="info">
+                                        <strong>สายด่วน สคบ. (ผู้บริโภค)</strong>
+                                        <span>ร้องเรียนสิทธิ์ สินค้าและบริการไม่ได้มาตรฐาน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1441" class="contact-item" data-em-keywords="1441 สายด่วนภัยไซเบอร์ ตำรวจไซเบอร์ ออนไลน์ โดนหลอก บัญชีม้า แก้ไขปัญหาอาชญากรรม">
+                                    <span class="number" style="color: var(--accent-red);">1441</span>
+                                    <div class="info">
+                                        <strong>สายด่วนภัยไซเบอร์ (AOC)</strong>
+                                        <span>ระงับธุรกรรมออนไลน์ โดนหลอก โดนโกงเงิน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1191" class="contact-item" data-em-keywords="1191 กองปราบปรามการค้ามนุษย์ ปคม ปราบปราม ค้าประเวณี แรงงานบังคับ">
+                                    <span class="number" style="color: var(--accent-red);">1191</span>
+                                    <div class="info">
+                                        <strong>ปราบปรามการค้ามนุษย์ (ปคม.)</strong>
+                                        <span>แจ้งเบาะแสค้าประเวณีและแรงงานบังคับ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1386" class="contact-item" data-em-keywords="1386 ปปส สายด่วน ยาเสพติด ค้ายา เสพยา แจ้งเบาะแส">
+                                    <span class="number" style="color: var(--accent-red);">1386</span>
+                                    <div class="info">
+                                        <strong>สายด่วน ป.ป.ส. (ยาเสพติด)</strong>
+                                        <span>แจ้งเบาะแสแหล่งค้ายา แหล่งเสพยาเสพติด</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1555" class="contact-item" data-em-keywords="1555 สายด่วนกทม กรุงเทพ ร้องทุกข์ ขยะ ท่อระบายน้ำ กลิ่นเหม็น ถนนชำรุด ปัญหา">
+                                    <span class="number" style="color: var(--accent-red);">1555</span>
+                                    <div class="info">
+                                        <strong>ศูนย์ร้องทุกข์ กทม. (BMA)</strong>
+                                        <span>ร้องเรียนปัญหาสาธารณะ ความสะอาด น้ำท่วมขัง</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Group 2: การแพทย์ & กู้ชีพ -->
+                        <div class="dashboard-card emergency-group-card" data-em-group="medical">
+                            <div class="card-glow" style="background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.08), transparent 50%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="heart-pulse" class="text-green"></i> การแพทย์ & กู้ชีพ</h3>
+                            </div>
+                            <div class="contacts-grid">
+                                <a href="tel:1669" class="contact-item" data-em-keywords="1669 เจ็บป่วย ฉุกเฉิน สพฉ กู้ชีพ โรงพยาบาล รักษา หมอ อุบัติเหตุ">
+                                    <span class="number" style="color: var(--accent-green);">1669</span>
+                                    <div class="info">
+                                        <strong>เจ็บป่วยฉุกเฉิน (สพฉ.)</strong>
+                                        <span>สถาบันการแพทย์ฉุกเฉินแห่งชาติ (ฟรี 24 ชม.)</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1646" class="contact-item" data-em-keywords="1646 กู้ชีพ เอราวัณ กรุงเทพ รถพยาบาล ฉุกเฉิน">
+                                    <span class="number" style="color: var(--accent-green);">1646</span>
+                                    <div class="info">
+                                        <strong>ศูนย์การแพทย์ฉุกเฉิน (เอราวัณ)</strong>
+                                        <span>หน่วยกู้ชีพและบริการรถพยาบาลใน กทม.</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1554" class="contact-item" data-em-keywords="1554 วชิรพยาบาล กู้ชีพ รถพยาบาล ฉุกเฉิน แพทย์">
+                                    <span class="number" style="color: var(--accent-green);">1554</span>
+                                    <div class="info">
+                                        <strong>หน่วยแพทย์กู้ชีวิต วชิรพยาบาล</strong>
+                                        <span>บริการรถแพทย์ฉุกเฉิน กู้ชีพฉุกเฉิน 24 ชม.</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1667" class="contact-item" data-em-keywords="1667 สุขภาพจิต สายด่วน เครียด ปรึกษา จิตแพทย์ ซึมเศร้า">
+                                    <span class="number" style="color: var(--accent-green);">1667</span>
+                                    <div class="info">
+                                        <strong>สายด่วนสุขภาพจิต</strong>
+                                        <span>ปรึกษาปัญหาทางจิตใจ ปัญหาครอบครัว/เครียด</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1330" class="contact-item" data-em-keywords="1330 บัตรทอง สปสช ตรวจสอบสิทธิ์ รักษาพยาบาล 30บาท สุขภาพ">
+                                    <span class="number" style="color: var(--accent-green);">1330</span>
+                                    <div class="info">
+                                        <strong>สายด่วน สปสช. (สิทธิ์บัตรทอง)</strong>
+                                        <span>สอบถามสิทธิ์การรักษาพยาบาล 30 บาท</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1506" class="contact-item" data-em-keywords="1506 ประกันสังคม เจ็บป่วย คลอดบุตร ว่างงาน รักษาพยาบาล รพ">
+                                    <span class="number" style="color: var(--accent-green);">1506</span>
+                                    <div class="info">
+                                        <strong>สายด่วนประกันสังคม</strong>
+                                        <span>เช็กสิทธิ์ประโยชน์และการรักษาประกันสังคม</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1665" class="contact-item" data-em-keywords="1665 สภากาชาดไทย บริจาคเลือด บริจาคอวัยวะ ร่างกาย ขอความช่วยเหลือการแพทย์">
+                                    <span class="number" style="color: var(--accent-green);">1665</span>
+                                    <div class="info">
+                                        <strong>สายด่วนสภากาชาดไทย</strong>
+                                        <span>ติดต่อบริจาคโลหิต อวัยวะ หรือขอความช่วยเหลือ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1648" class="contact-item" data-em-keywords="1648 ป่อเต็กตึ๊ง ร่วมกตัญญู มูลนิธิ กู้ภัยอุบัติเหตุ รถชน">
+                                    <span class="number" style="color: var(--accent-green);">1648</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกู้ชีพป่อเต็กตึ๊ง</strong>
+                                        <span>แจ้งอุบัติเหตุทางถนน หรือเหตุฉุกเฉินกู้ภัย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1167" class="contact-item" data-em-keywords="1167 อย อาหารและยา ร้องเรียน ยาปลอม อาหารเสีย เครื่องสำอางอันตราย สิทธิ์ผู้บริโภค">
+                                    <span class="number" style="color: var(--accent-green);">1167</span>
+                                    <div class="info">
+                                        <strong>สายด่วน อย. (อาหาร & ยา)</strong>
+                                        <span>ร้องเรียนอาหาร ยา และเครื่องสำอางไม่ได้มาตรฐาน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1668" class="contact-item" data-em-keywords="1668 กรมการแพทย์ สายด่วน ปรึกษา หมอ คลินิก รักษาพยาบาล เฉพาะทาง">
+                                    <span class="number" style="color: var(--accent-green);">1668</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมการแพทย์</strong>
+                                        <span>ติดต่อสอบถามข้อมูลการรักษาพยาบาลโรคเฉพาะทาง</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1422" class="contact-item" data-em-keywords="1422 ควบคุมโรค กรมควบคุมโรค โรคติดต่อ ไข้เลือดออก ไข้หวัดใหญ่ ป้องกัน สุขภาพ">
+                                    <span class="number" style="color: var(--accent-green);">1422</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมควบคุมโรค</strong>
+                                        <span>สอบถามข้อมูลโรคระบาด การฉีดวัคซีนและการป้องกันโรค</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1645" class="contact-item" data-em-keywords="1645 ร่วมกตัญญู มูลนิธิ กู้ชีพ กู้ภัย อุบัติเหตุ รถชน เสียชีวิต บรรเทาภัย">
+                                    <span class="number" style="color: var(--accent-green);">1645</span>
+                                    <div class="info">
+                                        <strong>สายด่วนมูลนิธิร่วมกตัญญู</strong>
+                                        <span>แจ้งอุบัติเหตุ ขอรับความช่วยเหลือฉุกเฉิน</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Group 3: สาธารณูปโภค & ภัยพิบัติ -->
+                        <div class="dashboard-card emergency-group-card" data-em-group="utility">
+                            <div class="card-glow" style="background: radial-gradient(circle at 100% 0%, rgba(245, 158, 11, 0.08), transparent 50%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="flame" class="text-amber"></i> สาธารณูปโภค & ภัยพิบัติ</h3>
+                            </div>
+                            <div class="contacts-grid">
+                                <a href="tel:1784" class="contact-item" data-em-keywords="1784 บรรเทาสาธารณภัย ปภ น้ำท่วม พายุ ภัยธรรมชาติ ดินสไลด์ ดินถล่ม">
+                                    <span class="number" style="color: var(--accent-amber);">1784</span>
+                                    <div class="info">
+                                        <strong>กรมป้องกันและบรรเทาสาธารณภัย (ปภ.)</strong>
+                                        <span>แจ้งเหตุอุทกภัย วาตภัย ดินถล่ม และภัยพิบัติ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1130" class="contact-item" data-em-keywords="1130 ไฟฟ้า MEA ไฟดับ ไฟช็อต ไฟรั่ว กรุงเทพ นนทบุรี สมุทรปราการ หม้อแปลงระเบิด">
+                                    <span class="number" style="color: var(--accent-amber);">1130</span>
+                                    <div class="info">
+                                        <strong>การไฟฟ้านครหลวง (MEA)</strong>
+                                        <span>แจ้งไฟดับ หม้อแปลงระเบิด กทม./นนทบุรี/สมุทรปราการ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1129" class="contact-item" data-em-keywords="1129 ไฟฟ้า PEA ส่วนภูมิภาค ไฟดับ ไฟช็อต หม้อแปลงระเบิด ต่างจังหวัด">
+                                    <span class="number" style="color: var(--accent-amber);">1129</span>
+                                    <div class="info">
+                                        <strong>การไฟฟ้าส่วนภูมิภาค (PEA)</strong>
+                                        <span>แจ้งไฟฟ้าขัดข้อง หม้อแปลงระเบิด พื้นที่ต่างจังหวัด</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1125" class="contact-item" data-em-keywords="1125 ประปา MWA น้ำไม่ไหล ท่อแตก ท่อรั่ว กทม ปริมณฑล นนทบุรี สมุทรปราการ">
+                                    <span class="number" style="color: var(--accent-amber);">1125</span>
+                                    <div class="info">
+                                        <strong>การประปานครหลวง (MWA)</strong>
+                                        <span>แจ้งน้ำประปาไม่ไหล ท่อแตกรั่ว กทม. และนนทบุรี</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1127" class="contact-item" data-em-keywords="1127 ประปา PWA ส่วนภูมิภาค น้ำไม่ไหล ท่อแตก ท่อรั่ว ต่างจังหวัด">
+                                    <span class="number" style="color: var(--accent-amber);">1127</span>
+                                    <div class="info">
+                                        <strong>การประปาส่วนภูมิภาค (PWA)</strong>
+                                        <span>แจ้งน้ำประปาไม่ไหล ท่อแตกรั่ว พื้นที่ต่างจังหวัด</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1182" class="contact-item" data-em-keywords="1182 อุตุนิยมวิทยา สภาพอากาศ เช็กพยากรณ์อากาศ เตือนภัยลมมรสุม พายุฤดูร้อน">
+                                    <span class="number" style="color: var(--accent-amber);">1182</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมอุตุนิยมวิทยา</strong>
+                                        <span>เช็กสภาพอากาศ คาดการณ์ลมพายุ เตือนภัยฝนตก</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1460" class="contact-item" data-em-keywords="1460 ชลประทาน ระบายน้ำ อ่างเก็บน้ำ เขื่อนแตก คลองล้นตลิ่ง น้ำท่วม">
+                                    <span class="number" style="color: var(--accent-amber);">1460</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมชลประทาน</strong>
+                                        <span>เช็กปริมาณน้ำ แจ้งเตือนน้ำท่วม/ปัญหาระบายน้ำ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1650" class="contact-item" data-em-keywords="1650 สิ่งแวดล้อม ควันพิษ สารเคมีรั่วไหล น้ำเสีย โรงงานปล่อยสารเคมี ฝุ่นควัน มลพิษ">
+                                    <span class="number" style="color: var(--accent-amber);">1650</span>
+                                    <div class="info">
+                                        <strong>ศูนย์รับแจ้งมลพิษสิ่งแวดล้อม</strong>
+                                        <span>แจ้งเหตุควันพิษ สารเคมีรั่วไหล หรือมลพิษน้ำเสีย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:192" class="contact-item" data-em-keywords="192 ภัยพิบัติ ภัยธรรมชาติ แผ่นดินไหว สึนามิ น้ำท่วมฉับพลัน เตือนภัยล่วงหน้า">
+                                    <span class="number" style="color: var(--accent-amber);">192</span>
+                                    <div class="info">
+                                        <strong>ศูนย์เตือนภัยพิบัติแห่งชาติ</strong>
+                                        <span>เตือนภัยธรรมชาติรุนแรง แผ่นดินไหว หรือสึนามิ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1569" class="contact-item" data-em-keywords="1569 การค้าภายใน กรมการค้าภายใน ราคาแพง ตาชั่งไม่ตรง โดนโกงราคา สินค้าขาดแคลน">
+                                    <span class="number" style="color: var(--accent-amber);">1569</span>
+                                    <div class="info">
+                                        <strong>กรมการค้าภายใน (สินค้าแพง)</strong>
+                                        <span>ร้องเรียนราคาสินค้าแพง เอาเปรียบ ตาชั่งไม่ตรง</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1111" class="contact-item" data-em-keywords="1111 นายก สำนักนายก ร้องเรียน ร้องทุกข์ ภาครัฐ เดือดร้อน ทั่วไป เจ้าหน้าที่รัฐ">
+                                    <span class="number" style="color: var(--accent-amber);">1111</span>
+                                    <div class="info">
+                                        <strong>ศูนย์บริการประชาชน (ทำเนียบ)</strong>
+                                        <span>รับเรื่องร้องทุกข์ปัญหาความเดือดร้อนทั่วไปภาครัฐ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1548" class="contact-item" data-em-keywords="1548 ปกครอง กรมการปกครอง บัตรประชาชน ทะเบียนราษฎร์ ทะเบียนบ้าน งานทะเบียน ข้อมูล">
+                                    <span class="number" style="color: var(--accent-amber);">1548</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมการปกครอง</strong>
+                                        <span>สอบถามข้อมูลการทำบัตรประชาชน ทะเบียนราษฎร์</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Group 4: คมนาคม & การเดินทาง -->
+                        <div class="dashboard-card emergency-group-card" data-em-group="travel">
+                            <div class="card-glow" style="background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.08), transparent 50%);"></div>
+                            <div class="card-header">
+                                <h3><i data-lucide="milestone" class="text-cyan"></i> คมนาคม & การเดินทาง</h3>
+                            </div>
+                            <div class="contacts-grid">
+                                <a href="tel:1197" class="contact-item" data-em-keywords="1197 จราจร บก02 รถติด อุบัติเหตุ รถเสีย ทางแยก ทางด่วน">
+                                    <span class="number" style="color: var(--accent-cyan);">1197</span>
+                                    <div class="info">
+                                        <strong>ข้อมูลจราจร (บก.02)</strong>
+                                        <span>สอบถามสภาพรถติด เส้นทางจราจร หรือแจ้งอุบัติเหตุ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1193" class="contact-item" data-em-keywords="1193 ทางหลวง ตำรวจทางหลวง รถเสียบนทางหลวง อุบัติเหตุทางหลวง ช่วยเหลือ">
+                                    <span class="number" style="color: var(--accent-cyan);">1193</span>
+                                    <div class="info">
+                                        <strong>ตำรวจทางหลวง</strong>
+                                        <span>แจ้งเหตุหรือขอความช่วยเหลือบนทางหลวงแผ่นดิน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1543" class="contact-item" data-em-keywords="1543 ทางด่วน การทางพิเศษ EXAT รถเสียบนทางด่วน">
+                                    <span class="number" style="color: var(--accent-cyan);">1543</span>
+                                    <div class="info">
+                                        <strong>สายด่วนการทางพิเศษ (EXAT)</strong>
+                                        <span>ขอความช่วยเหลือหรือแจ้งรถเสียบนทางด่วน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1584" class="contact-item" data-em-keywords="1584 ขนส่ง ทะเบียน ร้องเรียน แท็กซี่ รถเมล์ รถตู้ พฤติกรรมอันตราย">
+                                    <span class="number" style="color: var(--accent-cyan);">1584</span>
+                                    <div class="info">
+                                        <strong>กรมการขนส่งทางบก</strong>
+                                        <span>ร้องเรียนรถสาธารณะ หรือพฤติกรรมการขับรถอันตราย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1146" class="contact-item" data-em-keywords="1146 ทางหลวงชนบท ถนนพัง ไฟทางดับ">
+                                    <span class="number" style="color: var(--accent-cyan);">1146</span>
+                                    <div class="info">
+                                        <strong>กรมทางหลวงชนบท</strong>
+                                        <span>แจ้งเหตุขัดข้องทางถนนชำรุด หรือไฟถนนดับบนสายชนบท</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1690" class="contact-item" data-em-keywords="1690 การรถไฟ รฟท รถไฟไทย ตารางรถไฟ ตั๋วรถไฟ รถไฟเสีย">
+                                    <span class="number" style="color: var(--accent-cyan);">1690</span>
+                                    <div class="info">
+                                        <strong>สายด่วนการรถไฟแห่งประเทศไทย</strong>
+                                        <span>สอบถามข้อมูลตั๋ว ตารางเดินรถไฟ และแจ้งความปลอดภัย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1490" class="contact-item" data-em-keywords="1490 บขส รถทัวร์ รถร่วม เดินทาง ขนส่งระหว่างจังหวัด ตารางรถทัวร์">
+                                    <span class="number" style="color: var(--accent-cyan);">1490</span>
+                                    <div class="info">
+                                        <strong>สายด่วน บริษัท ขนส่ง จำกัด (บขส.)</strong>
+                                        <span>จองตั๋วรถทัวร์ สอบถามรอบรถบัสเดินทางต่างจังหวัด</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1722" class="contact-item" data-em-keywords="1722 ท่าอากาศยาน AOT สนามบิน ดอนเมือง สุวรรณภูมิ ตารางบิน หายของ">
+                                    <span class="number" style="color: var(--accent-cyan);">1722</span>
+                                    <div class="info">
+                                        <strong>สายด่วนการท่าอากาศยาน (AOT)</strong>
+                                        <span>สอบถามข้อมูลตารางบิน ปัญหาความปลอดภัยในสนามบินหลัก</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1586" class="contact-item" data-em-keywords="1586 กรมทางหลวง ทางหลวง สภาพจราจร รถเสีย บนทางหลวง ทั่วประเทศ สอบถามทาง">
+                                    <span class="number" style="color: var(--accent-cyan);">1586</span>
+                                    <div class="info">
+                                        <strong>สายด่วนกรมทางหลวง</strong>
+                                        <span>สอบถามเส้นทางหรือขอความช่วยเหลือรถเสียทั่วไทย</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1348" class="contact-item" data-em-keywords="1348 ขสมก รถเมล์ กรุงเทพ สอบถามสายรถเมล์ ร้องเรียน บริการ เส้นทาง">
+                                    <span class="number" style="color: var(--accent-cyan);">1348</span>
+                                    <div class="info">
+                                        <strong>สายด่วน ขสมก. (รถเมล์ กทม.)</strong>
+                                        <span>สอบถามเส้นทางสายรถเมล์ในกรุงเทพฯ และร้องเรียน</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1356" class="contact-item" data-em-keywords="1356 คมนาคม ศูนย์ปลอดภัยคมนาคม อุบัติเหตุรถสาธารณะ ทางน้ำ ทางบก เรือโดยสาร">
+                                    <span class="number" style="color: var(--accent-cyan);">1356</span>
+                                    <div class="info">
+                                        <strong>ศูนย์ความปลอดภัยคมนาคม</strong>
+                                        <span>แจ้งอุบัติเหตุทางบก ทางน้ำ และทางอากาศสาธารณะ</span>
+                                    </div>
+                                </a>
+                                <a href="tel:1672" class="contact-item" data-em-keywords="1672 ททท ท่องเที่ยว ข้อมูลท่องเที่ยว แหล่งท่องเที่ยว กิจกรรม เที่ยวทั่วไทย เพื่อนเดินทาง">
+                                    <span class="number" style="color: var(--accent-cyan);">1672</span>
+                                    <div class="info">
+                                        <strong>ททท. เพื่อนเดินทางท่องเที่ยว</strong>
+                                        <span>สอบถามข้อมูลสถานที่ท่องเที่ยว เส้นทาง และกิจกรรม</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No results message -->
+                    <div id="emergency-no-results" style="display: none; text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-family: var(--font-thai); width: 100%;">
+                        <i data-lucide="info" style="width: 48px; height: 48px; margin-bottom: 1rem; color: var(--text-muted); display: inline-block;"></i>
+                        <p style="font-size: 1rem; margin-top: 0.5rem; margin-bottom: 0;">ไม่พบหมายเลขด่วนที่คุณต้องการ ลองค้นหาคำอื่นดูนะ</p>
+                    </div>
+                </section>
