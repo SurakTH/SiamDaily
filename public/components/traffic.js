@@ -221,48 +221,57 @@ class TransitService {
         const container = document.getElementById('map-iframe-container');
         const longdoBtn = document.getElementById('btn-map-longdo');
         const googleBtn = document.getElementById('btn-map-google');
-
         if (!container) return;
 
-        if (type === 'longdo') {
-            if (longdoBtn) longdoBtn.classList.add('active');
-            if (googleBtn) googleBtn.classList.remove('active');
-            container.innerHTML = `
-                <iframe 
-                    id="traffic-iframe"
-                    src="https://map.longdo.com/snippet/iframe.php?locale=th&mode=traffic&map=epsg3857&lat=13.7946&long=100.3242&zoom=14" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
-                <div class="traffic-overlay-legend">
-                    <span class="legend-item"><span class="color-dot green"></span> สะดวก</span>
-                    <span class="legend-item"><span class="color-dot orange"></span> ชะลอตัว</span>
-                    <span class="legend-item"><span class="color-dot red"></span> ติดขัด</span>
-                    <span class="legend-item" style="color:var(--primary-color)"><i data-lucide="info" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> ซูมเข้า/ออก เพื่อดูสภาพการจราจรบนท้องถนนรอบ ม.มหิดล ศาลายา</span>
-                </div>
-            `;
-        } else {
-            if (longdoBtn) longdoBtn.classList.remove('active');
-            if (googleBtn) googleBtn.classList.add('active');
-            container.innerHTML = `
-                <iframe 
-                    id="traffic-iframe"
-                    src="https://maps.google.com/maps?q=13.7946,100.3242&t=h&z=15&output=embed" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
-                <div class="traffic-overlay-legend">
-                    <span class="legend-item" style="color:var(--primary-color)"><i data-lucide="info" style="display:inline-block;width:12px;height:12px;vertical-align:middle;margin-right:2px"></i> แผนที่ผ่านดาวเทียม (Google Maps) รอบ ม.มหิดล ศาลายา</span>
-                </div>
-            `;
-        }
-        if (window.lucide) window.lucide.createIcons();
+        if (type) this.mapType = type;
+        this.mapType = this.mapType || 'longdo';
+        const { lat, lon, zoom } = this.mapCenter || { lat: 13.7946, lon: 100.3242, zoom: 14 };
+        const isLongdo = this.mapType === 'longdo';
+
+        if (longdoBtn) longdoBtn.classList.toggle('active', isLongdo);
+        if (googleBtn) googleBtn.classList.toggle('active', !isLongdo);
+
+        const src = isLongdo
+            ? `https://map.longdo.com/snippet/iframe.php?locale=th&mode=traffic&map=epsg3857&lat=${lat}&long=${lon}&zoom=${zoom}`
+            : `https://maps.google.com/maps?q=${lat},${lon}&t=h&z=${zoom}&output=embed`;
+        const gmapsLink = `https://www.google.com/maps/@${lat},${lon},${zoom}z/data=!5m1!1e1`;
+
+        container.innerHTML = `
+            <iframe id="traffic-iframe" src="${src}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="traffic-overlay-legend">
+                <span class="legend-item"><span class="color-dot green"></span> สะดวก</span>
+                <span class="legend-item"><span class="color-dot orange"></span> ชะลอตัว</span>
+                <span class="legend-item"><span class="color-dot red"></span> ติดขัด</span>
+                <a class="legend-item" href="${gmapsLink}" target="_blank" rel="noopener" style="color:var(--primary-color)">เปิดแผนที่จราจรเต็มจอ (Google Maps) ↗</a>
+            </div>
+        `;
+    }
+
+    /**
+     * Sets the map center and re-renders the map.
+     */
+    setMapCenter(lat, lon, zoom = 14) {
+        this.mapCenter = { lat, lon, zoom };
+        this.toggleMap();
+    }
+
+    /**
+     * Wires up the location selector and GPS button.
+     */
+    initMapLocation() {
+        const sel = document.getElementById('select-map-location');
+        const gps = document.getElementById('btn-map-gps');
+        if (sel) sel.addEventListener('change', () => {
+            const [lat, lon, zoom] = sel.value.split(',').map(Number);
+            this.setMapCenter(lat, lon, zoom);
+        });
+        if (gps) gps.addEventListener('click', () => {
+            if (!navigator.geolocation) return alert('เบราว์เซอร์ไม่รองรับการระบุตำแหน่ง');
+            navigator.geolocation.getCurrentPosition(
+                pos => this.setMapCenter(+pos.coords.latitude.toFixed(5), +pos.coords.longitude.toFixed(5), 15),
+                () => alert('ไม่สามารถระบุตำแหน่งปัจจุบันได้')
+            );
+        });
     }
 
     /**
