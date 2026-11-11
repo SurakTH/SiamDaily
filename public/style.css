@@ -2898,3 +2898,17 @@ select.form-control {
 }
 
 
+
+/* === DROPDOWN POPUP READABILITY (native <select> options) === */
+:root { color-scheme: dark; }
+.light-theme { color-scheme: light; }
+select option,
+select optgroup {
+    background-color: #161c36;
+    color: #f3f4f6;
+}
+.light-theme select option,
+.light-theme select optgroup {
+    background-color: #ffffff;
+    color: #111827;
+}

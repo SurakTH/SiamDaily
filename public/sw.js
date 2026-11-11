@@ -1,4 +1,4 @@
-const CACHE_NAME = 'siam-daily-hub-v30';
+const CACHE_NAME = 'siam-daily-hub-v31';
 const ASSETS = [
   '/',
   '/index.html',
